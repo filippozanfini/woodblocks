@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="691.0" style="-fx-background-color: sienna;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartController">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="306.0" prefWidth="691.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="startButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="229.0" style="-fx-background-color: khaki; -fx-background-radius: 5em; -fx-background-size: px; -fx-pressed: red;" text="Start">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="settingsButton" layoutX="241.0" layoutY="10.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="229.0" style="-fx-background-color: khaki; -fx-background-radius: 5em; -fx-background-size: px;" text="Settings">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets top="60.0" />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </center>
+   <top>
+      <ImageView fitHeight="475.0" fitWidth="589.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../assets/Blocks/logo_large.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="35.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </top>
+</BorderPane>

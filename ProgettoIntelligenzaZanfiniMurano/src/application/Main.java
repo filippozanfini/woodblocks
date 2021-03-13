@@ -1,5 +1,6 @@
 package application;
 
+import controllers.WoodBlockController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WoodBlock.fxml"));
 		BorderPane pane = (BorderPane) loader.load();
-		Scene scene = new Scene(pane, 750, 700);
+		Scene scene = new Scene(pane, 775, 762);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);

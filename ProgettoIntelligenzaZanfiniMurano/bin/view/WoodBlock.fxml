@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="661.0" style="-fx-background-color: #FEDD55;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WoodBlockController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="775.0" style="-fx-background-color: #FEDD55;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WoodBlockController">
    <center>
-      <GridPane fx:id="gameMatrix" alignment="CENTER" gridLinesVisible="true" prefHeight="309.0" prefWidth="600.0" style="-fx-background-color: #ECC41F;" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gameMatrix" alignment="CENTER" gridLinesVisible="true" layoutX="100.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="440.0" style="-fx-background-color: #ECC41F;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,15 +36,15 @@
       </GridPane>
    </center>
    <top>
-      <AnchorPane prefHeight="137.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="129.0" prefWidth="775.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="-5.0" layoutY="18.0" prefHeight="100.0" prefWidth="667.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="230.0" layoutY="-1.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER" layoutX="230.0" layoutY="-4.0" prefHeight="121.0" prefWidth="786.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-11.0" AnchorPane.topAnchor="-4.0">
                      <children>
                         <AnchorPane maxHeight="80.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;">
                            <children>
-                              <Label fx:id="recordLabel" alignment="CENTER" layoutX="25.0" layoutY="32.0" text="300" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="recordLabel" alignment="CENTER" text="300" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="31.0" />
                                  </font>
@@ -53,7 +53,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="80.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;">
                            <children>
-                              <Label fx:id="currentRecord" alignment="CENTER" layoutX="20.0" layoutY="26.0" text="1304" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="currentRecord" alignment="CENTER" text="1304" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="31.0" />
                                  </font>
@@ -68,31 +68,16 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="137.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="196.0" prefWidth="669.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="-3.0" layoutY="58.0" prefHeight="100.0" prefWidth="667.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+            <AnchorPane fx:id="anchorblocks" layoutX="-3.0" layoutY="11.0" prefHeight="126.0" prefWidth="661.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0" />
+            <HBox fx:id="boxblocks" alignment="CENTER" layoutY="12.0" prefHeight="188.0" prefWidth="775.0" spacing="30.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="238.0" layoutY="-2.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <AnchorPane maxHeight="80.0" maxWidth="130.0" minHeight="80.0" minWidth="130.0" prefHeight="80.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;">
-                           <children>
-                              <ImageView fx:id="block1" fitHeight="78.0" fitWidth="148.0" layoutX="-24.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="276.0" layoutY="29.0" maxHeight="80.0" maxWidth="130.0" minHeight="80.0" minWidth="130.0" prefHeight="80.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;">
-                           <children>
-                              <ImageView fx:id="block2" fitHeight="78.0" fitWidth="148.0" layoutX="-24.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="356.0" layoutY="29.0" maxHeight="80.0" maxWidth="130.0" minHeight="80.0" minWidth="130.0" prefHeight="80.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;">
-                           <children>
-                              <ImageView fx:id="block3" fitHeight="78.0" fitWidth="148.0" layoutX="-24.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="130.0" prefHeight="120.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;" />
+                  <AnchorPane layoutX="276.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="130.0" prefHeight="120.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;" />
+                  <AnchorPane layoutX="356.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="130.0" prefHeight="120.0" prefWidth="130.0" style="-fx-background-color: #757575; -fx-background-radius: 10px;" />
                </children>
-            </AnchorPane>
+            </HBox>
          </children>
       </AnchorPane>
    </bottom>
@@ -100,6 +85,6 @@
       <AnchorPane prefHeight="263.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <AnchorPane prefHeight="263.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="446.0" prefWidth="161.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>
