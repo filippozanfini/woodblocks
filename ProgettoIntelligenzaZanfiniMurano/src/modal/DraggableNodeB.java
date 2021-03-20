@@ -16,14 +16,17 @@ public class DraggableNodeB extends DraggableNode {
 
     }
     @Override
-    public void setColor(MouseEvent e,GridPane gameMatrix){
-        int x =(int)((this.getLayoutX()-30)/51)%100-1;
-        int y=(int)(this.getLayoutY()/51)%100-1;
+    public void setColor(GridPane gameMatrix, boolean conferma){
+        int x = (int)((this.getLayoutX()-30)/51)%100-1;
+        int y = (int)(this.getLayoutY()/51)%100-1;
+
+        System.out.println(x);
+        System.out.println(y);
     
-
-        gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
-
-        e.consume();
-        
+        if(conferma) {
+            gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
+        } else {
+            gameMatrix.add(new Rectangle(42,42,Color.web("CCC")),x, y);
+        }
     }
 }

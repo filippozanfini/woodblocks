@@ -7,8 +7,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import modal.DraggableNode;
-import modal.DraggableNodeC;
-import modal.DraggableNodeL;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
-import javafx.scene.shape.Rectangle;
 
 public class WoodBlockController implements Initializable {
 
@@ -58,8 +54,11 @@ public class WoodBlockController implements Initializable {
     	
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            node1.setPane(gameMatrix);
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            node2.setPane(gameMatrix);
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            node3.setPane(gameMatrix);
           } catch (InstantiationException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -73,7 +72,7 @@ public class WoodBlockController implements Initializable {
     	
     	
     	node1.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node1.setColor(e, gameMatrix);
+            node1.setColor(gameMatrix, true);
             incrementCurrentRecord(node1);
             borderpane.getChildren().remove(node1);
              
@@ -86,7 +85,7 @@ public class WoodBlockController implements Initializable {
         });
         
         node2.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node2.setColor(e, gameMatrix);
+            node2.setColor(gameMatrix, true);
             incrementCurrentRecord(node2);
             borderpane.getChildren().remove(node2);
             
@@ -98,7 +97,7 @@ public class WoodBlockController implements Initializable {
         });
         
         node3.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node3.setColor(e, gameMatrix);
+            node3.setColor(gameMatrix, true);
             incrementCurrentRecord(node3);
             borderpane.getChildren().remove(node3);
             
@@ -136,7 +135,7 @@ public class WoodBlockController implements Initializable {
     	Random random = new Random();
     	int n = random.nextInt(22);
     	System.out.println("numero random "+ n);
-    	String name = Array.get(cls,n).toString();
+    	String name = "modal.DraggableNodeT90";
     	System.out.println("name : "+ name);
     	return name;
     }

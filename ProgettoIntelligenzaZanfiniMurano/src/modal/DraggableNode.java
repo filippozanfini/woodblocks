@@ -84,8 +84,10 @@ public abstract class DraggableNode extends Pane {
 
                 // again set current Mouse x AND y position
                 mousex = event.getSceneX();
-                mousey = event.getSceneY();
-             
+                mousey = event.getSceneY();  
+                
+                setColor(pane, false);
+
                 event.consume();
             }
         });
@@ -93,6 +95,7 @@ public abstract class DraggableNode extends Pane {
         onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                System.out.println("3");
 
                 dragging = false;
             }
@@ -133,5 +136,5 @@ public abstract class DraggableNode extends Pane {
         getChildren().remove(n);
     }
 
-    public abstract void setColor(MouseEvent e,GridPane gameMatrix);
+    public abstract void setColor(GridPane gameMatrix, boolean conferma);
 }
