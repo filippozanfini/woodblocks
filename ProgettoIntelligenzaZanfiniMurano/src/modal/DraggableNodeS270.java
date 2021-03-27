@@ -15,7 +15,7 @@ public class DraggableNodeS270 extends DraggableNode {
 
     }
     @Override
-    public void setColor(GridPane gameMatrix, boolean conferma){
+    public boolean setColor(GridPane gameMatrix, boolean conferma){
         int x =(int)((this.getLayoutX()-30)/51)%100-1;
         int y=(int)(this.getLayoutY()/51)%100-1;
     
@@ -30,6 +30,8 @@ public class DraggableNodeS270 extends DraggableNode {
             gameMatrix.add(new Rectangle(42,42,Color.web("CCC")),x+1, y-1);
             gameMatrix.add(new Rectangle(42,42,Color.web("CCC")),x+1, y-2);
         }
+
+        return true;
 
     }
 }

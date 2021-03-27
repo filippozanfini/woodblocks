@@ -1,12 +1,12 @@
 
 package controllers;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import modal.DraggableNode;
+import modal.GameMatrix;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -41,10 +41,12 @@ public class WoodBlockController implements Initializable {
     private DraggableNode node3;
     
     private int nodeCount;
+    private GameMatrix matrix;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) { 
-        currentRecord.setText("0");
+      matrix = GameMatrix.getInstance();
+      currentRecord.setText("0");
     	recordLabel.setText("0");
     	initBlocks();
     }
@@ -72,52 +74,63 @@ public class WoodBlockController implements Initializable {
     	
     	
     	node1.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node1.setColor(gameMatrix, true);
-            incrementCurrentRecord(node1);
-            borderpane.getChildren().remove(node1);
+            if(node1.setColor(gameMatrix, true)) {
+              incrementCurrentRecord(node1);
+              borderpane.getChildren().remove(node1);
              
-            if(nodeCount == 1) {
-            	initBlocks();
+              if(nodeCount == 1) {
+            	  initBlocks();
+              } else {
+            	  nodeCount--;
+              }
             } else {
-            	nodeCount--;
-            }
-                      
+              node1.setLayoutX(165);
+              node1.setLayoutY(595);
+            }       
         });
         
         node2.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node2.setColor(gameMatrix, true);
+          if(node2.setColor(gameMatrix, true)) {
             incrementCurrentRecord(node2);
             borderpane.getChildren().remove(node2);
-            
+           
             if(nodeCount == 1) {
-            	initBlocks();
+              initBlocks();
             } else {
-            	nodeCount--;
+              nodeCount--;
             }
+          } else {
+            node2.setLayoutX(315);
+            node2.setLayoutY(595);
+          }
         });
         
         node3.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-            node3.setColor(gameMatrix, true);
+          if(node3.setColor(gameMatrix, true)) {
             incrementCurrentRecord(node3);
             borderpane.getChildren().remove(node3);
-            
+           
             if(nodeCount == 1) {
-            	initBlocks();
+              initBlocks();
             } else {
-            	nodeCount--;
+              nodeCount--;
             }
+          } else {
+            node3.setLayoutX(470);
+            node3.setLayoutY(595);
+          }
          });
     	
-    	node1.setLayoutX(175);
-        node1.setLayoutY(590);
-        node2.setLayoutX(325);
-        node2.setLayoutY(590);
-        node3.setLayoutX(480);
-        node3.setLayoutY(590);
+    	node1.setLayoutX(165);
+      node1.setLayoutY(595);
+      node2.setLayoutX(315);
+      node2.setLayoutY(595);
+      node3.setLayoutX(470);
+      node3.setLayoutY(595);
           
-        borderpane.getChildren().add(node1);
-        borderpane.getChildren().add(node2);
-        borderpane.getChildren().add(node3);
+      borderpane.getChildren().add(node1);
+      borderpane.getChildren().add(node2);
+      borderpane.getChildren().add(node3);
     }
     
     public void incrementCurrentRecord(DraggableNode node) {

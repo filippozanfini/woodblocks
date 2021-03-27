@@ -53,8 +53,6 @@ public abstract class DraggableNode extends Pane {
                 mousey = event.getSceneY();
                 x = getLayoutX();
                 y = getLayoutY();
-                System.out.println("x: "+ x);
-                System.out.println("y: "+ y);
                 if (isMoveToFront()) {
                     toFront();
                 }
@@ -136,5 +134,13 @@ public abstract class DraggableNode extends Pane {
         getChildren().remove(n);
     }
 
-    public abstract void setColor(GridPane gameMatrix, boolean conferma);
+    protected boolean checkAvailability(int x, int y) {
+        if((x > 9 || y > 9) || (x < 0 || y < 0)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public abstract boolean setColor(GridPane gameMatrix, boolean conferma);
 }
