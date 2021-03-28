@@ -1,14 +1,21 @@
 
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import application.Main;
 import modal.DraggableNode;
 import modal.GameMatrix;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.input.MouseEvent;
@@ -16,8 +23,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
-public class WoodBlockController implements Initializable {
+public class WoodBlockController{
 
     @FXML
     private HBox boxblocks;
@@ -35,6 +43,9 @@ public class WoodBlockController implements Initializable {
     private AnchorPane anchorblocks;
 
     @FXML
+    private Button back_button;
+
+    @FXML
     private Label currentRecord;
     private DraggableNode node1;
     private DraggableNode node2;
@@ -42,13 +53,34 @@ public class WoodBlockController implements Initializable {
     
     private int nodeCount;
     private GameMatrix matrix;
+    private Stage stage;
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) { 
+ 
+    public void init(Stage g) { 
+      stage = g;
       matrix = GameMatrix.getInstance();
+
       currentRecord.setText("0");
     	recordLabel.setText("0");
-    	initBlocks();
+    	initBlocks(); 
+    }
+        
+    @FXML
+    void goBack(ActionEvent event) {
+      FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
+      BorderPane root2;
+      try {
+          root2 = (BorderPane) loader2.load();
+          StartController rc = loader2.getController();
+          rc.init(stage);
+          Scene scene = new Scene(root2,735,832);
+          stage.setScene(scene);
+          stage.show();
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+    
+
     }
     
     public void initBlocks() {
@@ -84,8 +116,8 @@ public class WoodBlockController implements Initializable {
             	  nodeCount--;
               }
             } else {
-              node1.setLayoutX(165);
-              node1.setLayoutY(595);
+              node1.setLayoutX(140);
+              node1.setLayoutY(660);
             }       
         });
         
@@ -100,8 +132,8 @@ public class WoodBlockController implements Initializable {
               nodeCount--;
             }
           } else {
-            node2.setLayoutX(315);
-            node2.setLayoutY(595);
+            node2.setLayoutX(300);
+            node2.setLayoutY(660);
           }
         });
         
@@ -116,17 +148,18 @@ public class WoodBlockController implements Initializable {
               nodeCount--;
             }
           } else {
-            node3.setLayoutX(470);
-            node3.setLayoutY(595);
+            node3.setLayoutX(460);
+            node3.setLayoutY(660);
+          
           }
          });
     	
-    	node1.setLayoutX(165);
-      node1.setLayoutY(595);
-      node2.setLayoutX(315);
-      node2.setLayoutY(595);
-      node3.setLayoutX(470);
-      node3.setLayoutY(595);
+    	node1.setLayoutX(140);
+      node1.setLayoutY(660);
+      node2.setLayoutX(300);
+      node2.setLayoutY(660);
+      node3.setLayoutX(460);
+      node3.setLayoutY(660);
           
       borderpane.getChildren().add(node1);
       borderpane.getChildren().add(node2);
@@ -145,12 +178,11 @@ public class WoodBlockController implements Initializable {
     			"modal.DraggableNodeT90", "modal.DraggableNodeT180", "modal.DraggableNodeT270", "modal.DraggableNodeIH", "modal.DraggableNodeIV", 
     			"modal.DraggableNodeI2H", "modal.DraggableNodeI2V", "modal.DraggableNodeS", "modal.DraggableNodeS90", "modal.DraggableNodeS180", 
     			"modal.DraggableNodeS270", "modal.DraggableNodeC", "modal.DraggableNodeB"};
-    	Random random = new Random();
-    	int n = random.nextInt(22);
-    	System.out.println("numero random "+ n);
-    	String name = "modal.DraggableNodeT90";
-    	System.out.println("name : "+ name);
-    	return name;
+          Random random = new Random();
+          int n = random.nextInt(22);
+          String name = cls[n];
+          System.out.println("name : "+ name);
+        return name;
     }
 }
 
