@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="735.0" style="-fx-background-color: #57270d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WoodBlockController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="735.0" style="-fx-background-color: #57270d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WoodBlockController">
    <center>
       <GridPane fx:id="gameMatrix" alignment="CENTER" gridLinesVisible="true" layoutX="100.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="440.0" style="-fx-background-color: #e0ba8c;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -40,7 +40,7 @@
    <top>
       <AnchorPane prefHeight="129.0" prefWidth="775.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="-5.0" layoutY="18.0" prefHeight="100.0" prefWidth="667.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="-5.0" layoutY="18.0" prefHeight="70.0" prefWidth="735.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox prefHeight="128.0" prefWidth="735.0" AnchorPane.bottomAnchor="-19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -73,15 +73,22 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <Button fx:id="back_button" mnemonicParsing="false" onAction="#goBack" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" text="Home" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Button fx:id="back_button" mnemonicParsing="false" onAction="#goBack" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/homeicon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </AnchorPane>
    </top>
    <bottom>
       <AnchorPane prefHeight="196.0" prefWidth="669.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="anchorblocks" layoutX="-3.0" layoutY="11.0" prefHeight="126.0" prefWidth="661.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0" />
-            <HBox fx:id="boxblocks" alignment="CENTER" layoutY="5.0" prefHeight="191.0" prefWidth="715.0" spacing="30.0" style="-fx-background-color: #411c0a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+            <AnchorPane fx:id="anchorblocks" layoutX="-3.0" layoutY="69.0" prefHeight="127.0" prefWidth="735.0" style="-fx-background-color: #B2B2B2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0" />
+            <HBox fx:id="boxblocks" alignment="CENTER" layoutY="42.0" prefHeight="154.0" prefWidth="735.0" spacing="30.0" style="-fx-background-color: #411c0a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="130.0" prefHeight="120.0" prefWidth="130.0" style="-fx-background-color: #b97e46; -fx-background-radius: 10px;" />
                   <AnchorPane layoutX="276.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="130.0" prefHeight="120.0" prefWidth="130.0" style="-fx-background-color: #b97e46; -fx-background-radius: 10px;" />

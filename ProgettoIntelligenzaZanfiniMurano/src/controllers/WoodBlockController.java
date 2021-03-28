@@ -73,7 +73,7 @@ public class WoodBlockController{
           root2 = (BorderPane) loader2.load();
           StartController rc = loader2.getController();
           rc.init(stage);
-          Scene scene = new Scene(root2,735,832);
+          Scene scene = new Scene(root2,735,750);
           stage.setScene(scene);
           stage.show();
       } catch (IOException e) {
@@ -116,8 +116,8 @@ public class WoodBlockController{
             	  nodeCount--;
               }
             } else {
-              node1.setLayoutX(140);
-              node1.setLayoutY(660);
+              node1.setLayoutX(130);
+              node1.setLayoutY(600);
             }       
         });
         
@@ -132,8 +132,8 @@ public class WoodBlockController{
               nodeCount--;
             }
           } else {
-            node2.setLayoutX(300);
-            node2.setLayoutY(660);
+            node2.setLayoutX(290);
+            node2.setLayoutY(600);
           }
         });
         
@@ -148,18 +148,18 @@ public class WoodBlockController{
               nodeCount--;
             }
           } else {
-            node3.setLayoutX(460);
-            node3.setLayoutY(660);
+            node3.setLayoutX(450);
+            node3.setLayoutY(600);
           
           }
          });
     	
-    	node1.setLayoutX(140);
-      node1.setLayoutY(660);
-      node2.setLayoutX(300);
-      node2.setLayoutY(660);
-      node3.setLayoutX(460);
-      node3.setLayoutY(660);
+    	node1.setLayoutX(130);
+      node1.setLayoutY(600);
+      node2.setLayoutX(290);
+      node2.setLayoutY(600);
+      node3.setLayoutX(450);
+      node3.setLayoutY(600);
           
       borderpane.getChildren().add(node1);
       borderpane.getChildren().add(node2);
@@ -181,7 +181,6 @@ public class WoodBlockController{
           Random random = new Random();
           int n = random.nextInt(22);
           String name = cls[n];
-          System.out.println("name : "+ name);
         return name;
     }
 }

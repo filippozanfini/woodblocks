@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="775.0" style="-fx-background-color: sienna;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartController">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="392.0" prefWidth="775.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="556.0" prefWidth="775.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="startButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startGame" prefHeight="63.0" prefWidth="293.0" style="-fx-background-color: khaki; -fx-background-radius: 30px;" text="Start">
                <font>

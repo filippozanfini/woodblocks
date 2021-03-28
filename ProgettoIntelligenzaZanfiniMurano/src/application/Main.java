@@ -21,12 +21,12 @@ public class Main extends Application {
 		StartController rc = loaderStart.getController();
 		rc.init(primaryStage);
 
-		Scene scene = new Scene(root,875,762);
+		Scene scene = new Scene(root,735,750);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 		primaryStage.setScene(scene);
-		//primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		
 	}

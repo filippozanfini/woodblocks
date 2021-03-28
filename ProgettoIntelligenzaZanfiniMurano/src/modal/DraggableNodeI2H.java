@@ -53,6 +53,11 @@ public class DraggableNodeI2H extends DraggableNode {
     }
 
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
+      
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y)) {
+            return;
+        }
+
         gameMatrix.add(rectangle1,x, y);
         gameMatrix.add(rectangle2,x+1, y);
     }

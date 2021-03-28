@@ -47,6 +47,11 @@ public class DraggableNodeB extends DraggableNode {
     }
     
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
+
+        if(!GameMatrix.checkAvailability(x, y)) {
+            return;
+        }
+
         gameMatrix.add(rectangle1,x, y);
     }
 

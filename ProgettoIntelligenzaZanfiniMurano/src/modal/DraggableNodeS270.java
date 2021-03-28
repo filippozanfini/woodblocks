@@ -37,7 +37,7 @@ public class DraggableNodeS270 extends DraggableNode {
 
         if(conferma) {
             rimuoviAnteprima(gameMatrix);
-            if( GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x, y-1) && GameMatrix.checkAvailability(x+1, y-1) &&  GameMatrix.checkAvailability(x+1, y-2)){
+            if(GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x, y-1) && GameMatrix.checkAvailability(x+1, y-1) &&  GameMatrix.checkAvailability(x+1, y-2)){
                 aggiungiBlocco(gameMatrix, x, y);
                 return true;
             } 
@@ -59,6 +59,11 @@ public class DraggableNodeS270 extends DraggableNode {
     }
 
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
+
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x, y-1) || !GameMatrix.checkAvailability(x+1, y-1) || !GameMatrix.checkAvailability(x+1, y-2)) {
+            return;
+        }
+        
         gameMatrix.add(rectangle1,x, y);
         gameMatrix.add(rectangle2,x, y-1);
         gameMatrix.add(rectangle3,x+1, y-1);

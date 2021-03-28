@@ -36,8 +36,9 @@ public class StartController {
             root2 = (BorderPane) loader2.load();
             WoodBlockController rc = loader2.getController();
             rc.init(stage);
-            Scene scene = new Scene(root2,735,810);
+            Scene scene = new Scene(root2,735,750);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
