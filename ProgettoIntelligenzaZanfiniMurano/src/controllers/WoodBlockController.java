@@ -3,6 +3,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -14,16 +15,26 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class WoodBlockController{
 
@@ -59,7 +70,7 @@ public class WoodBlockController{
     public void init(Stage g) { 
       stage = g;
       matrix = GameMatrix.getInstance();
-
+     
       currentRecord.setText("0");
     	recordLabel.setText("0");
     	initBlocks(); 
@@ -67,7 +78,7 @@ public class WoodBlockController{
         
     @FXML
     void goBack(ActionEvent event) {
-      FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
+      /*FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
       BorderPane root2;
       try {
           root2 = (BorderPane) loader2.load();
@@ -78,7 +89,8 @@ public class WoodBlockController{
           stage.show();
       } catch (IOException e) {
           e.printStackTrace();
-      }
+      }*/
+      gameOverAlert();
     
 
     }
@@ -247,7 +259,44 @@ public class WoodBlockController{
     }
 
     public void gameOverAlert() {
-      System.out.println("GAME OVER!!!");
+      Image image = new Image("/assets/game_over.png",100,50, false, false);
+      ImageView imageView = new ImageView(image);
+      Alert alert = new Alert(AlertType.WARNING);
+      Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+      stage.getIcons().add(new Image(this.getClass().getResource("/assets/blocks/logo_small_icon_only.png").toString()));
+      alert.setContentText("Hai perso! Nessuna mossa disponibile.");
+      alert.setGraphic(imageView);
+      alert.setHeaderText("GAME OVER!");
+      alert.setTitle("GAME OVER");
+      alert.initStyle(StageStyle.UNDECORATED);
+      alert.getDialogPane().setPadding(new Insets(30));
+     
+      ButtonType okButton = new ButtonType("Ricomincia", ButtonData.YES);
+      ButtonType exitButton = new ButtonType("Esci", ButtonData.NO);
+      alert.getButtonTypes().setAll(okButton, exitButton);
+      alert.showAndWait().ifPresent(type ->  {
+      if (type == okButton) { 
+        restart();
+      } else
+        System.exit(0);
+        
+      });
+      
+      
+    }
+    void restart() {
+      FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/WoodBlock.fxml"));
+      BorderPane root2;
+      try {
+          root2 = (BorderPane) loader2.load();
+          WoodBlockController rc = loader2.getController();
+          rc.init(stage);
+          Scene scene = new Scene(root2,735,750);
+          stage.setScene(scene);
+          stage.show();
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
     }
 }
 
