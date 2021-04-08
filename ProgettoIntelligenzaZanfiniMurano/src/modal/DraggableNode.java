@@ -143,4 +143,5 @@ public abstract class DraggableNode extends Pane {
     }
 
     public abstract boolean setColor(GridPane gameMatrix, boolean conferma);
+    public abstract boolean checkSpace(int x, int y);
 }

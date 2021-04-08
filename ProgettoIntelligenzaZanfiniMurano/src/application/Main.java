@@ -1,7 +1,6 @@
 package application;
 
 import controllers.StartController;
-import controllers.WoodBlockController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

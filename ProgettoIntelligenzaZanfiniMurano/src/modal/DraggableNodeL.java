@@ -25,6 +25,16 @@ public class DraggableNodeL extends DraggableNode {
     }
 
     @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y+2) || !GameMatrix.checkAvailability(x, y+1) || !GameMatrix.checkAvailability(x, y+2)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
         int x =(int)((this.getLayoutX()-30)/51)%100-1;
         int y=(int)(this.getLayoutY()/51)%100-1;
@@ -86,6 +96,7 @@ public class DraggableNodeL extends DraggableNode {
         GameMatrix.add(x+1, y+2);
         GameMatrix.add(x, y+1);
         GameMatrix.add(x, y+2);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

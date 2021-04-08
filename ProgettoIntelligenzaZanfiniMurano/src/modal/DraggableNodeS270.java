@@ -24,6 +24,16 @@ public class DraggableNodeS270 extends DraggableNode {
         this.setView(new ImageView(new Image("/assets/Blocks/"+"S270"+".png", 150, 150, false, false)));
 
     }
+
+    @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x, y-1) || !GameMatrix.checkAvailability(x+1, y-1) || !GameMatrix.checkAvailability(x+1, y-2)) {
+            return false;
+        }
+
+        return true;
+    }
     
     @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
@@ -88,6 +98,7 @@ public class DraggableNodeS270 extends DraggableNode {
         GameMatrix.add(x, y-1);
         GameMatrix.add(x+1, y-1);
         GameMatrix.add(x+1, y-2);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

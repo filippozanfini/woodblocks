@@ -103,13 +103,32 @@ public class WoodBlockController{
             // TODO Auto-generated catch block
             e1.printStackTrace();
           }
-    	
+    
     	
     	node1.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
             if(node1.setColor(gameMatrix, true)) {
               incrementCurrentRecord(node1);
               borderpane.getChildren().remove(node1);
-             
+
+              int spaceCount = 0;
+              
+              if(borderpane.getChildren().contains(node2)) {
+                if(GameMatrix.checkBlockAvailability(node2)) {
+                  spaceCount++;
+                }
+              }
+
+              if(borderpane.getChildren().contains(node3)) {
+                if(GameMatrix.checkBlockAvailability(node3)) {
+                  spaceCount++;
+                }
+              }
+
+              if((borderpane.getChildren().contains(node2) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
+                gameOverAlert();
+                return;
+              }
+
               if(nodeCount == 1) {
             	  initBlocks();
               } else {
@@ -125,6 +144,25 @@ public class WoodBlockController{
           if(node2.setColor(gameMatrix, true)) {
             incrementCurrentRecord(node2);
             borderpane.getChildren().remove(node2);
+
+            int spaceCount = 0;
+              
+              if(borderpane.getChildren().contains(node1)) {
+                if(GameMatrix.checkBlockAvailability(node1)) {
+                  spaceCount++;
+                }
+              }
+
+              if(borderpane.getChildren().contains(node3)) {
+                if(GameMatrix.checkBlockAvailability(node3)) {
+                  spaceCount++;
+                }
+              }
+
+              if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
+                gameOverAlert();
+                return;
+              }
            
             if(nodeCount == 1) {
               initBlocks();
@@ -141,6 +179,25 @@ public class WoodBlockController{
           if(node3.setColor(gameMatrix, true)) {
             incrementCurrentRecord(node3);
             borderpane.getChildren().remove(node3);
+
+            int spaceCount = 0;
+              
+              if(borderpane.getChildren().contains(node1)) {
+                if(GameMatrix.checkBlockAvailability(node1)) {
+                  spaceCount++;
+                }
+              }
+
+              if(borderpane.getChildren().contains(node2)) {
+                if(GameMatrix.checkBlockAvailability(node2)) {
+                  spaceCount++;
+                }
+              }
+
+              if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node2)) && spaceCount == 0) {
+                gameOverAlert();
+                return;
+              }
            
             if(nodeCount == 1) {
               initBlocks();
@@ -164,6 +221,11 @@ public class WoodBlockController{
       borderpane.getChildren().add(node1);
       borderpane.getChildren().add(node2);
       borderpane.getChildren().add(node3);
+
+      if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
+        gameOverAlert();
+        return;
+      }
     }
     
     public void incrementCurrentRecord(DraggableNode node) {
@@ -182,6 +244,10 @@ public class WoodBlockController{
           int n = random.nextInt(22);
           String name = cls[n];
         return name;
+    }
+
+    public void gameOverAlert() {
+      System.out.println("GAME OVER!!!");
     }
 }
 

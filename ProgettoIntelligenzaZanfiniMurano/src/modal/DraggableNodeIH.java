@@ -23,6 +23,16 @@ public class DraggableNodeIH extends DraggableNode {
         this.setView(new ImageView(new Image("/assets/Blocks/"+"IH"+".png", 150, 150, false, false)));
 
     }
+
+    @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y) || !GameMatrix.checkAvailability(x+2, y) || !GameMatrix.checkAvailability(x+3, y)) {
+            return false;
+        }
+
+        return true;
+    }
    
 
     @Override
@@ -87,6 +97,7 @@ public class DraggableNodeIH extends DraggableNode {
         GameMatrix.add(x+1, y);
         GameMatrix.add(x+2, y);
         GameMatrix.add(x+3, y);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

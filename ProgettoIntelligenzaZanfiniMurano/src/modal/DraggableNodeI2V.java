@@ -22,6 +22,16 @@ public class DraggableNodeI2V extends DraggableNode {
     }
 
     @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x, y+1)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
         int x =(int)((this.getLayoutX()-30)/51)%100-1;
         int y=(int)(this.getLayoutY()/51)%100-1;
@@ -74,6 +84,7 @@ public class DraggableNodeI2V extends DraggableNode {
 
         GameMatrix.add(x, y);
         GameMatrix.add(x, y+1);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

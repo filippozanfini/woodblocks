@@ -18,8 +18,17 @@ public class DraggableNodeI2H extends DraggableNode {
         rectangle2 = new Rectangle(42,42,Color.web("A1866B")); 
         this.setScore(2);
         this.setView(new ImageView(new Image("/assets/Blocks/"+"I2H"+".png", 150, 150, false, false)));
-
     }
+
+    @Override
+    public boolean checkSpace(int x, int y) {
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y)) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
         int x =(int)((this.getLayoutX()-30)/51)%100-1;
@@ -74,6 +83,7 @@ public class DraggableNodeI2H extends DraggableNode {
 
         GameMatrix.add(x, y);
         GameMatrix.add(x+1, y);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

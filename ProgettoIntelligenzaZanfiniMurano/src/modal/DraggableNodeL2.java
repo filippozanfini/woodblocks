@@ -25,6 +25,17 @@ public class DraggableNodeL2 extends DraggableNode {
         this.setView(new ImageView(new Image("/assets/Blocks/"+"L2"+".png", 150, 150, false, false)));
 
     }
+
+    @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y+2) || !GameMatrix.checkAvailability(x, y+1) || !GameMatrix.checkAvailability(x, y+2) ||
+        !GameMatrix.checkAvailability(x+2, y+2)) {
+            return false;
+        }
+
+        return true;
+    }
    
     @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
@@ -95,6 +106,7 @@ public class DraggableNodeL2 extends DraggableNode {
         GameMatrix.add(x, y+1);
         GameMatrix.add(x, y+2);
         GameMatrix.add(x+2, y+2);
+        GameMatrix.checkFull(gameMatrix);
     }
 
 }

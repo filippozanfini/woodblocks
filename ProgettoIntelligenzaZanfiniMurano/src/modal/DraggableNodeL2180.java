@@ -27,6 +27,17 @@ public class DraggableNodeL2180 extends DraggableNode {
         this.setView(new ImageView(new Image("/assets/Blocks/"+"L2_180"+".png", 150, 150, false, false)));
 
     }
+
+    @Override
+    public boolean checkSpace(int x, int y) {
+        
+        if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y) || !GameMatrix.checkAvailability(x+1, y+1) || !GameMatrix.checkAvailability(x+1, y+2) || !GameMatrix.checkAvailability(x-1, y)) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma) {
         int x =(int)((this.getLayoutX()-30)/51)%100-1;
@@ -94,6 +105,7 @@ public class DraggableNodeL2180 extends DraggableNode {
         GameMatrix.add(x+1, y+1);
         GameMatrix.add(x+1, y+2);
         GameMatrix.add(x-1, y);
+        GameMatrix.checkFull(gameMatrix);
 
     }
 
