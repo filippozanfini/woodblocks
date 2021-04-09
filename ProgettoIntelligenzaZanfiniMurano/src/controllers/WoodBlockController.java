@@ -1,11 +1,15 @@
 
 package controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import application.Main;
 import modal.DraggableNode;
@@ -72,8 +76,19 @@ public class WoodBlockController{
       matrix = GameMatrix.getInstance();
      
       currentRecord.setText("0");
-    	recordLabel.setText("0");
     	initBlocks(); 
+
+      try {
+        File recordFile = new File("record.txt");
+        if(recordFile.createNewFile()) {
+          saveRecordOnFile();
+        } else {
+          String record = getRecordFile();
+          recordLabel.setText(record);
+        }
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
     }
         
     @FXML
@@ -92,10 +107,9 @@ public class WoodBlockController{
       }*/
       gameOverAlert();
     
-
     }
     
-    public void initBlocks() {
+    private void initBlocks() {
     	nodeCount = 3;
     	
     	try {
@@ -240,12 +254,12 @@ public class WoodBlockController{
       }
     }
     
-    public void incrementCurrentRecord(DraggableNode node) {
+    private void incrementCurrentRecord(DraggableNode node) {
     	Integer current = Integer.parseInt(currentRecord.getText());
     	currentRecord.setText(Integer.toString(current+node.getScore()));
     }
   
-    public String randomblock(){
+    private String randomblock(){
 
     	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeL90", "modal.DraggableNodeL180", "modal.DraggableNodeL270", 
     			"modal.DraggableNodeL2", "modal.DraggableNodeL290", "modal.DraggableNodeL2180", "modal.DraggableNodeL2270", "modal.DraggableNodeT",
@@ -258,7 +272,7 @@ public class WoodBlockController{
         return name;
     }
 
-    public void gameOverAlert() {
+    private void gameOverAlert() {
       Image image = new Image("/assets/game_over.png",100,50, false, false);
       ImageView imageView = new ImageView(image);
       Alert alert = new Alert(AlertType.WARNING);
@@ -275,16 +289,18 @@ public class WoodBlockController{
       ButtonType exitButton = new ButtonType("Esci", ButtonData.NO);
       alert.getButtonTypes().setAll(okButton, exitButton);
       alert.showAndWait().ifPresent(type ->  {
-      if (type == okButton) { 
+      if (type == okButton) {
+        saveRecordOnFile(); 
         restart();
-      } else
+      } else {
+        saveRecordOnFile();
         System.exit(0);
+      }
         
       });
-      
-      
     }
-    void restart() {
+
+    private void restart() {
       FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/WoodBlock.fxml"));
       BorderPane root2;
       try {
@@ -298,6 +314,38 @@ public class WoodBlockController{
           e.printStackTrace();
       }
     }
+
+    private void saveRecordOnFile() {
+      try {
+        Integer current = Integer.parseInt(currentRecord.getText());
+        Integer record = Integer.parseInt(recordLabel.getText());
+
+        if(current > record) {
+          FileWriter writer = new FileWriter("record.txt");
+          writer.write(currentRecord.getText());
+          writer.close();
+        }
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    private String getRecordFile() {
+      String record = "0";
+      try {
+        File recordFile = new File("record.txt");
+        Scanner myReader = new Scanner(recordFile);
+        while (myReader.hasNextLine()) {
+          record = myReader.nextLine();
+        }
+        myReader.close();
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+      
+      return record;
+    }
+
 }
 
 
