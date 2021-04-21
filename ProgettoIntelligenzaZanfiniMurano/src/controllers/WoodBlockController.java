@@ -40,6 +40,19 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+import it.unical.mat.embasp.base.Handler;
+import it.unical.mat.embasp.base.InputProgram;
+import it.unical.mat.embasp.base.Output;
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
+import it.unical.mat.embasp.languages.ObjectNotValidException;
+import it.unical.mat.embasp.languages.asp.ASPInputProgram;
+import it.unical.mat.embasp.languages.asp.ASPMapper;
+import it.unical.mat.embasp.languages.asp.AnswerSet;
+import it.unical.mat.embasp.languages.asp.AnswerSets;
+import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
+import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
+import it.unical.mat.embasp.specializations.dlv2.desktop.DLV2DesktopService;
+
 public class WoodBlockController{
 
     @FXML
@@ -69,6 +82,10 @@ public class WoodBlockController{
     private int nodeCount;
     private GameMatrix matrix;
     private Stage stage;
+
+    private static String encodingResource="encodings/sudoku";
+	
+	  private static Handler handler;
     
  
     public void init(Stage g) { 
@@ -76,6 +93,44 @@ public class WoodBlockController{
       matrix = GameMatrix.getInstance();
      
       currentRecord.setText("0");
+
+      // EMBASP
+
+      //Se si esegue la demo su Windows 64bit scommentare la seguente istruzione:
+		  // handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2.exe"));
+
+		  //Se si esegue la demo su Linux 64bit scommentare la seguente istruzione:
+		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
+		
+		  //Se si esegue la demo su MacOS 64bit scommentare la seguente istruzione:
+		  handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
+
+      try {
+        ASPMapper.getInstance().registerClass(DraggableNode.class);
+      } catch (ObjectNotValidException | IllegalAnnotationException e1) {
+        e1.printStackTrace();
+      }
+
+      InputProgram facts = new ASPInputProgram();
+		  for(int i=0;i<10;i++) {
+			  for(int j=0;j<10;j++) {
+				  if(GameMatrix.get(i, j) != 0) {
+					  try {
+						  facts.addObjectInput(Class.forName(GameMatrix.getType(i, j)).newInstance());
+					  } catch (Exception e) {
+						  e.printStackTrace();
+					  }
+				  }
+			  }
+		  }
+
+      handler.addProgram(facts);
+
+      InputProgram encoding = new ASPInputProgram();
+		  encoding.addFilesPath(encodingResource);
+
+      handler.addProgram(encoding);
+
     	initBlocks(); 
 
       try {
@@ -88,7 +143,7 @@ public class WoodBlockController{
         }
       } catch(IOException e) {
         e.printStackTrace();
-      }
+      } 
     }
         
     @FXML

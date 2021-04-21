@@ -15,6 +15,7 @@ public class DraggableNodeB extends DraggableNode {
         rectangle1 = new Rectangle(42,42,Color.web("A1866B")); 
         this.setScore(1);
         this.setView(new ImageView(new Image("/assets/Blocks/"+"B"+".png", 150, 150, false, false)));
+        this.setType(this.getClass().getName());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class DraggableNodeB extends DraggableNode {
 
     private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
-        GameMatrix.add(x, y);
+        GameMatrix.add(x, y, this.getType());
         GameMatrix.checkFull(gameMatrix);
     }
 }

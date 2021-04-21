@@ -4,12 +4,19 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import it.unical.mat.embasp.languages.Id;
+import it.unical.mat.embasp.languages.Param;
 
+@Id("block")
 public abstract class DraggableNode extends Pane {
 
     // node position
+    @Param(0)
     private double x = 0;
+    @Param(1)
     private double y = 0;
+    @Param(2)
+    private String type;
     // mouse position
     private double mousex = 0;
     private double mousey = 0;
@@ -40,6 +47,14 @@ public abstract class DraggableNode extends Pane {
     
     public Integer getScore() {
     	return score;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     private void init() {

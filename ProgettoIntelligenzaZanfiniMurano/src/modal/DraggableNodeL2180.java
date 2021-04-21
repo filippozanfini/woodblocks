@@ -25,7 +25,7 @@ public class DraggableNodeL2180 extends DraggableNode {
 
         this.setScore(5);
         this.setView(new ImageView(new Image("/assets/Blocks/"+"L2_180"+".png", 150, 150, false, false)));
-
+        this.setType(this.getClass().getName());
     }
 
     @Override
@@ -100,11 +100,11 @@ public class DraggableNodeL2180 extends DraggableNode {
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+1, y+2);
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x-1, y);
 
-        GameMatrix.add(x, y);
-        GameMatrix.add(x+1, y);
-        GameMatrix.add(x+1, y+1);
-        GameMatrix.add(x+1, y+2);
-        GameMatrix.add(x-1, y);
+        GameMatrix.add(x, y, this.getType());
+        GameMatrix.add(x+1, y, this.getType());
+        GameMatrix.add(x+1, y+1, this.getType());
+        GameMatrix.add(x+1, y+2, this.getType());
+        GameMatrix.add(x-1, y, this.getType());
         GameMatrix.checkFull(gameMatrix);
 
     }

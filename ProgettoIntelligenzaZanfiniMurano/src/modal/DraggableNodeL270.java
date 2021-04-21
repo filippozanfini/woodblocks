@@ -22,7 +22,7 @@ public class DraggableNodeL270 extends DraggableNode {
         rectangle4 = new Rectangle(42,42,Color.web("A1866B")); 
         this.setScore(4);
         this.setView(new ImageView(new Image("/assets/Blocks/"+"L270"+".png", 150, 150, false, false)));
-
+        this.setType(this.getClass().getName());
     }
 
     @Override
@@ -93,10 +93,10 @@ public class DraggableNodeL270 extends DraggableNode {
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+2, y);
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+2, y-1);
 
-        GameMatrix.add(x, y);
-        GameMatrix.add(x+1, y);
-        GameMatrix.add(x+2, y);
-        GameMatrix.add(x+2, y-1);
+        GameMatrix.add(x, y, this.getType());
+        GameMatrix.add(x+1, y, this.getType());
+        GameMatrix.add(x+2, y, this.getType());
+        GameMatrix.add(x+2, y-1, this.getType());
         GameMatrix.checkFull(gameMatrix);
     }
 

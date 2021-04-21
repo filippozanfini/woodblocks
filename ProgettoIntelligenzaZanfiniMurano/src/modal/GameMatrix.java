@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 public class GameMatrix {
 
     private static int[][] matrix = new int[10][10];
+    private static String[][] typeBlockMatrix = new String[10][10];
 
     private static GameMatrix instance = null;
 
@@ -17,6 +18,7 @@ public class GameMatrix {
         for(int i=0; i<10; i++) {
             for(int j=0; j<10; j++) {
                 matrix[i][j] = 0;
+                typeBlockMatrix[i][j] = "";
             }
         }
     }
@@ -41,16 +43,22 @@ public class GameMatrix {
         return true;
     }
 
-    public static void add(int x, int y) {
+    public static void add(int x, int y, String type) {
         matrix[x][y] = 1;
+        typeBlockMatrix[x][y] = type;
     }
 
     public static void remove(int x, int y) {
         matrix[x][y] = 0;
+        typeBlockMatrix[x][y] = "";
     }
 
     public static int get(int x, int y) {
         return matrix[x][y];
+    }
+
+    public static String getType(int x, int y) {
+        return typeBlockMatrix[x][y];
     }
 
     public static void checkFull(GridPane gridPane) {

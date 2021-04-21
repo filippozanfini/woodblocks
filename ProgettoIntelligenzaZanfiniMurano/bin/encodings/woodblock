@@ -1,0 +1,48 @@
+%block(l). block(l90). block(l180). block(l270). block(l2).
+%block(l290). block(l2180). block(l2270). block(t). 
+%block(t90). block(t180). block(t270). block(ih).
+%block(iv). block(i2h). block(i2v). block(s). block(s90). 
+%block(s180). block(s270). block(c). block(b).
+
+pos(0..9).
+
+block(id, type).
+
+add(B, X, Y) | notAdd(B, X, Y) :- block(B, _), pos(X), pos(Y).
+
+% Non è possibile aggiungere un blocco con lo stesso id due volte.
+:- block(B,_), #count{B: add(B, _, _)}>1.
+
+% Non è possibile aggiungere un blocco in una posizione già occupata.
+:- block(B,_), pos(X), pos(Y), add(B2, X, Y), 
+
+
+////////////////////////////////////////
+
+
+sizeBlock(3).
+pos(0..8).
+symbol(1..9).
+
+cell(X,Y,N) | nocell(X,Y,N) :- pos(X), pos(Y), symbol(N).
+
+:- cell(X,Y,N), cell(X,Y,N1), N1 <> N.
+
+assigned(X,Y):- cell(X,Y,N).
+:- pos(X),pos(Y),not assigned(X,Y).
+
+:- cell(X,Y1,Z), cell(X,Y2,Z), Y1<>Y2.
+:- cell(X1,Y,Z), cell(X2,Y,Z), X1<>X2.
+
+insquare(Z,X,Y) :- pos(Z), pos(X), pos(Y),
+   div(X,N,R), div(Y,N,S), Y1 = S * N,
+   Z = R + Y1,sizeBlock(N).
+samesquare(X1,Y1,X2,Y2)
+    :- insquare(Z,X1,Y1), insquare(Z,X2,Y2).
+
+:- cell(X1,Y1,Z), cell(X2,Y2,Z),
+   Y1 <> Y2, samesquare(X1,Y1,X2,Y2).
+:- cell(X1,Y1,Z), cell(X2,Y2,Z),
+   X1 <> X2, samesquare(X1,Y1,X2,Y2).
+
+div(X,Y,Z) :- XminusDelta = Y*Z, X = XminusDelta + Delta, Delta < Y,pos(X),pos(Y),pos(Z),pos(XminusDelta),pos(Delta).
