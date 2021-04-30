@@ -40,9 +40,9 @@ public class StartController {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
+        } 
       
     }
 

@@ -4,7 +4,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
+import it.unical.mat.embasp.languages.Id;
+@Id("block")
 public class DraggableNodeS extends DraggableNode {
 
     private Rectangle rectangle1;
@@ -66,7 +67,25 @@ public class DraggableNodeS extends DraggableNode {
                 return false;
         }
     }
-
+    @Override
+    public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
+        System.out.println("ci sono");
+     
+      
+          node.setLayoutX(150);
+          node.setLayoutY(550);
+          aggiungiBlocco(gameMatrix, x, y);
+        /*  Timer timer = new Timer();
+          timer.schedule(new TimerTask(){
+              
+            @Override
+            public void run() {
+                aggiungiBlocco(gameMatrix, x, y);
+            }
+          }, 1000);*/
+                 
+          return true;
+        }
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
     
         if(!GameMatrix.checkAvailability(x, y) || !GameMatrix.checkAvailability(x+1, y) || !GameMatrix.checkAvailability(x+2, y-1) || !GameMatrix.checkAvailability(x+1, y-1)) {

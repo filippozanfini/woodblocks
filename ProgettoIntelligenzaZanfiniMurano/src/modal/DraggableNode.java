@@ -7,16 +7,22 @@ import javafx.scene.layout.Pane;
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
 
-@Id("block")
+@Id("block") 
 public abstract class DraggableNode extends Pane {
 
     // node position
     @Param(0)
-    private double x = 0;
+    private int ID;    
     @Param(1)
-    private double y = 0;
+    private int row = 0;
     @Param(2)
+    private int col = 0;
+    @Param(3)
     private String type;
+
+    private double x = 0;
+    private double y = 0;
+
     // mouse position
     private double mousex = 0;
     private double mousey = 0;
@@ -26,10 +32,38 @@ public abstract class DraggableNode extends Pane {
     private GridPane pane;
     private Integer score;
 
+    public DraggableNode(int ID, int row , int col) {
+    	score = 0;
+        init();
+        this.ID = ID;
+        this.row = row;
+        this.col = col;
+        
+    }
     public DraggableNode() {
     	score = 0;
         init();
         
+    }
+    public void setID(int id) {
+        System.out.println("ci sono CAZZOOOOOOOOO");
+        this.ID = id;
+    }
+    public int getID() {
+        System.out.println("ci sono CAJIOFAHIFEH");
+        return this.ID;
+    }
+    public void setRow(int row) {
+        this.row = row;
+    }
+    public int getRow() {
+        return row;
+    }
+    public void setCol(int col) {
+        this.col = col;
+    }
+    public int getCol() {
+        return col;
     }
     public void setPane(GridPane grid) {
         pane = grid;
@@ -54,7 +88,7 @@ public abstract class DraggableNode extends Pane {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     private void init() {
@@ -159,4 +193,15 @@ public abstract class DraggableNode extends Pane {
 
     public abstract boolean setColor(GridPane gameMatrix, boolean conferma);
     public abstract boolean checkSpace(int x, int y);
+
+    public void print(){
+
+        System.out.println("Type : "+ type);
+        System.out.println("Start to : x("+ x + "),("+ y + ")");
+
+    }
+    public boolean setColorEMBASP(GridPane gameMatrix, boolean b, int row2, int col2, DraggableNode node1) throws InterruptedException {
+        
+        return true;
+     }
 }

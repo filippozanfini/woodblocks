@@ -1,4 +1,5 @@
 package modal;
+import it.unical.mat.embasp.languages.Id;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+@Id("block")
 public class DraggableNodeB extends DraggableNode {
     private Rectangle rectangle1;
 
@@ -16,6 +18,9 @@ public class DraggableNodeB extends DraggableNode {
         this.setScore(1);
         this.setView(new ImageView(new Image("/assets/Blocks/"+"B"+".png", 150, 150, false, false)));
         this.setType(this.getClass().getName());
+    }
+    public DraggableNodeB(int ID,int row, int col){
+        super(ID, row, col);
     }
 
     @Override
@@ -56,6 +61,24 @@ public class DraggableNodeB extends DraggableNode {
         }
     }
     
+    @Override
+    public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
+        System.out.println("ci sono");
+     
+          node.setLayoutX(150);
+          node.setLayoutY(550);
+          aggiungiBlocco(gameMatrix, x, y);
+        /*  Timer timer = new Timer();
+          timer.schedule(new TimerTask(){
+              
+            @Override
+            public void run() {
+                aggiungiBlocco(gameMatrix, x, y);
+            }
+          }, 1000);*/
+                 
+          return true;
+        }
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
 
         if(!GameMatrix.checkAvailability(x, y)) {
