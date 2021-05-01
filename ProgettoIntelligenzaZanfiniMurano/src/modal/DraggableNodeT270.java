@@ -1,14 +1,23 @@
 package modal;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import it.unical.mat.embasp.languages.Id;
-@Id("block")
+import it.unical.mat.embasp.languages.Param;
+@Id("in")
 public class DraggableNodeT270 extends DraggableNode {
+
+    @Param(0)
+    private int ID;    
+    @Param(1)
+    private int row = 0;
+    @Param(2)
+    private int col = 0;
+    @Param(3)
+    private String type;
+    
 
     private Rectangle rectangle1;
     private Rectangle rectangle2;
@@ -17,6 +26,7 @@ public class DraggableNodeT270 extends DraggableNode {
 
     public DraggableNodeT270() {
         super();
+        System.out.println("E' stato istanziato un blocco T270");
         rectangle1 = new Rectangle(42,42,Color.web("A1866B")); 
         rectangle2 = new Rectangle(42,42,Color.web("A1866B")); 
         rectangle3 = new Rectangle(42,42,Color.web("A1866B")); 
@@ -70,7 +80,8 @@ public class DraggableNodeT270 extends DraggableNode {
         }
         @Override
         public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
-            System.out.println("ci sono");
+            System.out.println(".. utilizzando setColorEMBASP DraggableNodeT270.. ");
+
          
           
               node.setLayoutX(150);

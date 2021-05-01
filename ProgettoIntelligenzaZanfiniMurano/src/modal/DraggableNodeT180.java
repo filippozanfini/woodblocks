@@ -7,8 +7,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import it.unical.mat.embasp.languages.Id;
-@Id("block")
+import it.unical.mat.embasp.languages.Param;
+@Id("in")
 public class DraggableNodeT180 extends DraggableNode {
+
+    @Param(0)
+    private int ID;    
+    @Param(1)
+    private int row = 0;
+    @Param(2)
+    private int col = 0;
+    @Param(3)
+    private String type;
 
     private Rectangle rectangle1;
     private Rectangle rectangle2;
@@ -70,8 +80,7 @@ public class DraggableNodeT180 extends DraggableNode {
         }
         @Override
         public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
-            System.out.println("ci sono");
-         
+            System.out.println(".. utilizzando setColorEMBASP DraggableNodeT180.. ");
           
               node.setLayoutX(150);
               node.setLayoutY(550);
@@ -107,6 +116,8 @@ public class DraggableNodeT180 extends DraggableNode {
     }
 
     private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
+        
+
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+1, y);
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+2, y);

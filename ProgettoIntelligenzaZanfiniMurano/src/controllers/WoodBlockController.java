@@ -1,39 +1,26 @@
 
 package controllers;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.Set;
 
-import application.Main;
-import modal.Block;
-import modal.DraggableNode;
-import modal.DraggableNodeB;
-import modal.DraggableNodeC;
-import modal.FullCell;
-import modal.GameMatrix;
+import modal.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Cell;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -44,14 +31,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
+import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.languages.IllegalAnnotationException;
 import it.unical.mat.embasp.languages.ObjectNotValidException;
@@ -60,7 +44,6 @@ import it.unical.mat.embasp.languages.asp.ASPMapper;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 import it.unical.mat.embasp.languages.asp.AnswerSets;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
-import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
 import it.unical.mat.embasp.specializations.dlv2.desktop.DLV2DesktopService;
 
 public class WoodBlockController{
@@ -85,15 +68,15 @@ public class WoodBlockController{
 
     @FXML
     private Label currentRecord;
+
     private DraggableNode node1;
     private DraggableNode node2;
     private DraggableNode node3;
-    
     private int nodeCount;
     private GameMatrix matrix;
     private Stage stage;
 
-    private static String encodingResource="wood.txt";
+    private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
 	
 	  private static Handler handler;
     
@@ -102,9 +85,7 @@ public class WoodBlockController{
      
       stage = g;
       matrix = GameMatrix.getInstance();
-     
       currentRecord.setText("0");
-
     	initBlocks(); 
 
       try {
@@ -116,41 +97,53 @@ public class WoodBlockController{
           recordLabel.setText(record);
         }
       } catch(IOException e) {
-        System.out.println("massimo");
         e.printStackTrace();
       } 
       init_embasp();
     }
 
-    private void init_embasp() throws Exception{
-          // EMBASP
+    // EMBASP
+    public void init_embasp() throws Exception{
 
-      //Se si esegue la demo su Windows 64bit scommentare la seguente istruzione:
-		   handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
-     
-
-		  //Se si esegue la demo su Linux 64bit scommentare la seguente istruzione:
+      handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
 		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-		
-		  //Se si esegue la demo su MacOS 64bit scommentare la seguente istruzione:
 		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
-
-      /*
-      commentato giovanni
 
       try {
         ASPMapper.getInstance().registerClass(DraggableNode.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeB.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeC.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeI2H.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeI2V.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeIH.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeIV.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL2.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL290.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL2270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT270.class);
         ASPMapper.getInstance().registerClass(Block.class);
         ASPMapper.getInstance().registerClass(FullCell.class);
+
       } catch (ObjectNotValidException | IllegalAnnotationException e1) {
         e1.printStackTrace();
         System.out.println("errore");
-      }*/
+      }
+
     // 1. carico i blocchi da aggiungere come fatti
     // 2. carico le caselle piene come fatti
+    System.out.println("sono qui 2");
 
-      /*
-      commentato giovanni
 
       InputProgram facts = new ASPInputProgram();
 
@@ -166,76 +159,67 @@ public class WoodBlockController{
 				  }
 			  }
 		  }
-      */
-     /* Set<Object> dr = new HashSet<Object>();
-      dr.add(node1);
-      dr.add(node2);
-      dr.add(node3);*/
+      
+      System.out.println("sono qui 3");
+      System.out.println("node 1 type = "+ node1.getType());
+      Block b1 = new Block(1,node1.getType());
+      Block b2 = new Block(2,node2.getType());
+      Block b3 = new Block(3,node3.getType());
 
+      facts.addObjectInput(b1);
+      facts.addObjectInput(b2);
+      facts.addObjectInput(b3);
 
-      //facts.addObjectsInput(dr);
-     // facts.addObjectInput(node1);
-      //facts.addObjectInput(node2);
-      //facts.addObjectInput(node3);
-      System.out.println("node 1 "+ node1.getID());
-      System.out.println("node 2 "+ node2.getID());
-      System.out.println("node 3 "+ node3.getID());
-    
-
-     // handler.addProgram(facts);
-
+      handler.addProgram(facts);
+      
       InputProgram encoding = new ASPInputProgram();
 		  encoding.addFilesPath(encodingResource);
 
       handler.addProgram(encoding);
-      BufferedWriter d = new BufferedWriter(new FileWriter(encodingResource));
-      d.append("pos(1..9).");
-      d.close();
+      OptionDescriptor option = new OptionDescriptor("--filter=in/4");
+      OptionDescriptor option2= new OptionDescriptor("--filter=block/2");
 
-      //L'handler invoca DLV2 in modo SINCRONO dando come input il programma logico e i fatti
+      handler.addOption(option);
+    //  handler.addOption(option2);
+
+      /* OptionDescriptor option2 = new OptionDescriptor("-n0");  
+      handler.addOption(option2); */
+
       Output o =  handler.startSync();
-      
-      //Analizziamo l'answer set che in quest caso � unico e che rappresenta la soluziones
-      //del Sudoku e aggiorniamo la matrice
       AnswerSets answersets = (AnswerSets) o;
-      //System.out.println("ans "+ answersets.getAnswersets().get(0).);
-      System.out.println("size " +answersets.getAnswersets().get(0).getAtoms().size());
+      System.out.println("ans " + answersets.getAnswerSetsString());
+    
       for(AnswerSet a:answersets.getAnswersets()){
-       /*
         try {
-          System.out.println("atoms "+ a.getAtoms());
           for(Object obj:a.getAtoms()){
-            System.out.println(" ci sono obj");
-            //Scartiamo tutto ci� che non � un oggetto della classe Cell
-            if(!(obj instanceof DraggableNode)){
-              System.out.println("non sono un Draggable");
-              continue;
-            }
-            //Convertiamo in un oggetto della classe Cell e impostiamo il valore di ogni cella 
-            //nella matrice rappresentante la griglia del Sudoku
-            DraggableNode block = (DraggableNode) obj;
-            System.out.println(" id : "+ block.getID());
-            System.out.println(" type : "+ block.getType());
-            if(block.getID() == 1){
-              System.out.println("tipo 1");
-              block.setColorEMBASP(gameMatrix, true,0, 0, node1);
-              borderpane.getChildren().remove(node1);
-              incrementCurrentRecord(node1);
-            }
-            else if(block.getID() == 2){
-              System.out.println("tipo 2");
-              block.setColorEMBASP(gameMatrix, true,8,0, node2);
-              borderpane.getChildren().remove(node2);
-              incrementCurrentRecord(node2);
-            }
-            else if(block.getID() == 3){
-              System.out.println("tipo 3");
-              block.setColorEMBASP(gameMatrix, true,5,5, node3);
-              borderpane.getChildren().remove(node3);
-              incrementCurrentRecord(node3);
-            }
-           
+            System.out.println(obj.toString());
+            if(obj instanceof DraggableNode){
             
+              DraggableNode block = (DraggableNode) obj;
+              System.out.println("dopo");
+
+              block.print(); 
+             if(block.getID() == 1){
+                System.out.println("tipo 1");
+                node1.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node1);
+                System.out.println("node 1" + node1);
+                borderpane.getChildren().remove(node1);
+                  
+
+                incrementCurrentRecord(node1);
+              }
+              else if(block.getID() == 2){
+                System.out.println("tipo 2");
+                node2.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node2);
+                borderpane.getChildren().remove(node2);
+                incrementCurrentRecord(node2);
+            }
+              else if(block.getID() == 3){
+                System.out.println("tipo 3");
+                node3.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node3);
+                borderpane.getChildren().remove(node3);
+                incrementCurrentRecord(node3);
+              }
 
             int spaceCount = 0;
             
@@ -255,8 +239,8 @@ public class WoodBlockController{
               gameOverAlert();
               return;
             }
-              // PROBLEMA
-            if(nodeCount == 0) {
+          
+            if(nodeCount == 1) {
               System.out.println("node count "+ nodeCount);
               initBlocks();
             } else {
@@ -265,16 +249,17 @@ public class WoodBlockController{
           
             GameMatrix.add(block.getRow(), block.getCol(), block.getType());
           }
-        } catch (Exception e) {
+          }
+        } catch (IllegalAccessException e) {
           e.printStackTrace();
+          System.out.println("errore ");
         } 
-       */ 
+        
       }
       //Visualizziamo la griglia cos� ottenuta
       //displayMatrix();
       
       //In alternativa l'handler pu� invocare DLV2 in modo ASINCRONO.
-      //Scommentare la seguente linea e commentare le linee 89-110
       //handler.startAsync(new MyCallback(sudokuMatrix));
     }
     @FXML
@@ -297,29 +282,35 @@ public class WoodBlockController{
     
     private void initBlocks() {
     	nodeCount = 3;
-    	
+     
+
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            //node1 = new DraggableNodeC();
             node1.setPane(gameMatrix);
             node1.setID(1);
+           // node2 = new DraggableNodeC();
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
             node2.setPane(gameMatrix);
             node2.setID(2);
+
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
+           // node3 = new DraggableNodeB();
             node3.setPane(gameMatrix);
             node3.setID(3);
+
           } catch (InstantiationException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
           } catch (IllegalAccessException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
           } catch (ClassNotFoundException e1) {
-            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          } catch (Exception e1) {
             e1.printStackTrace();
           }
-    
-    	
+      
+      
+        
     	node1.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
             if(node1.setColor(gameMatrix, true)) {
               incrementCurrentRecord(node1);
@@ -436,6 +427,7 @@ public class WoodBlockController{
       borderpane.getChildren().add(node1);
       borderpane.getChildren().add(node2);
       borderpane.getChildren().add(node3);
+      
 
       if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
         gameOverAlert();
@@ -458,6 +450,7 @@ public class WoodBlockController{
           Random random = new Random();
           int n = random.nextInt(22);
           String name = cls[n];
+
         return name;
     }
 
@@ -499,7 +492,6 @@ public class WoodBlockController{
           try {
             rc.init(stage);
           } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
           Scene scene = new Scene(root2,735,750);

@@ -1,5 +1,6 @@
 package modal;
 import it.unical.mat.embasp.languages.Id;
+import it.unical.mat.embasp.languages.Param;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,10 +9,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-@Id("block")
+@Id("in")
 public class DraggableNodeB extends DraggableNode {
-    private Rectangle rectangle1;
 
+    @Param(0)
+    private int ID;    
+    @Param(1)
+    private int row = 0;
+    @Param(2)
+    private int col = 0;
+    @Param(3)
+    private String type;
+
+    private Rectangle rectangle1;
+  
+    
     public DraggableNodeB() {
         super();
         rectangle1 = new Rectangle(42,42,Color.web("A1866B")); 
@@ -63,7 +75,7 @@ public class DraggableNodeB extends DraggableNode {
     
     @Override
     public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
-        System.out.println("ci sono");
+        System.out.println(".. utilizzando setColorEMBASP in DraggableNodeB..");
      
           node.setLayoutX(150);
           node.setLayoutY(550);

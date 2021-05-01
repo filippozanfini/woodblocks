@@ -7,8 +7,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import it.unical.mat.embasp.languages.Id;
-@Id("block")
+import it.unical.mat.embasp.languages.Param;
+@Id("in")
 public class DraggableNodeS180 extends DraggableNode {
+    
+    @Param(0)
+    private int ID;    
+    @Param(1)
+    private int row = 0;
+    @Param(2)
+    private int col = 0;
+    @Param(3)
+    private String type;
 
     private Rectangle rectangle1;
     private Rectangle rectangle2;

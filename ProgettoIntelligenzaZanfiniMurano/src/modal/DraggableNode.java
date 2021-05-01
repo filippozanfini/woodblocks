@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
 
-@Id("block") 
+@Id("in") 
 public abstract class DraggableNode extends Pane {
 
     // node position
@@ -38,6 +38,7 @@ public abstract class DraggableNode extends Pane {
         this.ID = ID;
         this.row = row;
         this.col = col;
+        type = "";
         
     }
     public DraggableNode() {
@@ -46,11 +47,9 @@ public abstract class DraggableNode extends Pane {
         
     }
     public void setID(int id) {
-        System.out.println("ci sono CAZZOOOOOOOOO");
         this.ID = id;
     }
     public int getID() {
-        System.out.println("ci sono CAJIOFAHIFEH");
         return this.ID;
     }
     public void setRow(int row) {
@@ -159,20 +158,6 @@ public abstract class DraggableNode extends Pane {
 
 
     /**
-     * @return the view
-     */
-    public Node getView() {
-        return view;
-    }
-
-    /**
-     * @param moveToFront the moveToFront to set
-     */
-    public void setMoveToFront(boolean moveToFront) {
-        this.moveToFront = moveToFront;
-    }
-
-    /**
      * @return the moveToFront
      */
     public boolean isMoveToFront() {
@@ -197,11 +182,8 @@ public abstract class DraggableNode extends Pane {
     public void print(){
 
         System.out.println("Type : "+ type);
-        System.out.println("Start to : x("+ x + "),("+ y + ")");
+        System.out.println("Start to : x("+ getRow() + "),("+ getCol() + ")");
 
     }
-    public boolean setColorEMBASP(GridPane gameMatrix, boolean b, int row2, int col2, DraggableNode node1) throws InterruptedException {
-        
-        return true;
-     }
+    public abstract boolean setColorEMBASP(GridPane gameMatrix, boolean b, int row2, int col2, DraggableNode node1) throws InterruptedException;
 }

@@ -7,45 +7,34 @@ import it.unical.mat.embasp.languages.Param;
 public class Block{
 
     @Param(0)
-    private int x;
-    @Param(1)
-    private int y;
-    @Param(2)
-    private String type;
-    @Param(3)
     private int ID;
+    @Param(1)
+    private String type;
 
-    public Block(int x,int y,String type,int ID){
-        this.x = x;
-        this.y = y;
+    public Block(){
+        this.type = "";
+        this.ID = 0;
+    }
+
+    public Block(int ID,String type){
         this.type = type;
         this.ID = ID;
     }
     public void setType(String type) {
         this.type = type;
     }
-
-    public String getType() {
-        return this.type;
+    public String getType(){
+        return type;
     }
     public void setID(int ID) {
         this.ID = ID;
     }
-
     public int getID() {
         return ID;
     }
-    public void setRow(int x) {
-        this.x = x;
-    }
-    public void setCol(int y) {
-        this.y = y;
-    }
-    public int getRow() {
-        return x;
-    }
-    public int getCol() {
-        return y;
+    @Override
+    public String toString() {
+        return "Il seguente blocco ha ID "+ getID() + ", type: "+getType();
     }
 
-    }
+}
