@@ -83,7 +83,7 @@ public class WoodBlockController{
     private GameMatrix matrix;
     private Stage stage;
 
-    private static String encodingResource="encodings/sudoku";
+    private static String encodingResource="encodings/woodblock";
 	
 	  private static Handler handler;
     
