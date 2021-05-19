@@ -1,4 +1,5 @@
 package modal;
+import controllers.WoodBlockController;
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
 import javafx.scene.Node;
@@ -80,6 +81,7 @@ public class DraggableNodeB extends DraggableNode {
           node.setLayoutX(150);
           node.setLayoutY(550);
           aggiungiBlocco(gameMatrix, x, y);
+          
         /*  Timer timer = new Timer();
           timer.schedule(new TimerTask(){
               

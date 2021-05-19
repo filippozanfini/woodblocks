@@ -12,8 +12,9 @@ public class FullCell {
 
     @Param(1)
 	private int col;
-
+    public FullCell(){}
     public FullCell(int row,int col){
+        super();
         this.row = row;
         this.col = col;
     }
