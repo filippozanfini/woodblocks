@@ -103,9 +103,9 @@ public class WoodBlockController{
     // EMBASP
     public void init_embasp() throws Exception{
 
-      handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
+      //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
 		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
+		  handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
       try {
         ASPMapper.getInstance().registerClass(DraggableNode.class);
@@ -202,8 +202,6 @@ public class WoodBlockController{
                 node1.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node1);
                 System.out.println("node 1" + node1);
                 borderpane.getChildren().remove(node1);
-                  
-
                 incrementCurrentRecord(node1);
               }
               else if(block.getID() == 2){

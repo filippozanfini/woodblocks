@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "ProgettoIntelligenzaZanfiniMurano/src/lib/antlr-4.7-complete.jar"
+    ]
+}
