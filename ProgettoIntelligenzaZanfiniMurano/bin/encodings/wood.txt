@@ -10,7 +10,6 @@ in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(
 
 %%%%%%%%%%
 
-
 % DraggableNodeC
 
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y).
