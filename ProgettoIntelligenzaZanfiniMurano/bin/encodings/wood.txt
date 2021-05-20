@@ -2,11 +2,139 @@ pos(0..9).
 :-#count{N,X,Y : in(N,X,Y,_)}>1.
 :-#count{N,X,Y : in(N,X,Y,_)}=0.
 
-
 in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
+
+% DraggableNodeC
+
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y).
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X+1,Y).
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y+1).
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X+1,Y+1).
 :-in(ID,X,Y,"modal.DraggableNodeC"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeC"),Y+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL2180
+
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),full(X+1,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),full(X+1,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),full(X-1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),Y+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2180"),X-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeL2270
+
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),full(X+2,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),full(X+2,Y-2).
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),Y-2<0.
+:-in(ID,X,Y,"modal.DraggableNodeL2270"),Y-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeS
+
+:-in(ID,X,Y,"modal.DraggableNodeS"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS"),full(X+2,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS"),full(X+1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeS"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeS"),Y-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeS90
+
+:-in(ID,X,Y,"modal.DraggableNodeS90"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS90"),full(X,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS90"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS90"),full(X+1,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeS90"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeS90"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeS90"),Y-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeS180
+
+:-in(ID,X,Y,"modal.DraggableNodeS180"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS180"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS180"),full(X,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS180"),full(X-1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS180"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeS180"),Y-1<0.
+:-in(ID,X,Y,"modal.DraggableNodeS180"),X-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeS270
+
+:-in(ID,X,Y,"modal.DraggableNodeS270"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeS270"),full(X,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS270"),full(X+1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeS270"),full(X+1,Y-2).
+:-in(ID,X,Y,"modal.DraggableNodeS270"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeS270"),Y-1<0.
+:-in(ID,X,Y,"modal.DraggableNodeS270"),Y-2<0.
+
+%%%%%%%%%%
+
+% DraggableNodeT
+
+:-in(ID,X,Y,"modal.DraggableNodeT"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT"),full(X+1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeT"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeT"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeT"),Y-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeT90
+
+:-in(ID,X,Y,"modal.DraggableNodeT90"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT90"),full(X,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeT90"),full(X,Y-2).
+:-in(ID,X,Y,"modal.DraggableNodeT90"),full(X+1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeT90"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeT90"),Y-1<0.
+:-in(ID,X,Y,"modal.DraggableNodeT90"),Y-2<0.
+
+%%%%%%%%%%
+
+% DraggableNodeT180
+
+:-in(ID,X,Y,"modal.DraggableNodeT180"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT180"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT180"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT180"),full(X+1,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeT180"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeT180"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeT180"),Y+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeT270
+
+:-in(ID,X,Y,"modal.DraggableNodeT270"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeT270"),full(X,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeT270"),full(X,Y-2).
+:-in(ID,X,Y,"modal.DraggableNodeT270"),full(X-1,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeT270"),X-1<0.
+:-in(ID,X,Y,"modal.DraggableNodeT270"),Y-1<0.
+:-in(ID,X,Y,"modal.DraggableNodeT270"),Y-2<0.
+
+%%%%%%%%%%

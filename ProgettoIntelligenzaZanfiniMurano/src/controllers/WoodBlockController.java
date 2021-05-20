@@ -179,7 +179,7 @@ public class WoodBlockController{
       public Void call() {
           while(play) {
             try {
-              Thread.sleep(500);
+              Thread.sleep(1000);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
@@ -292,16 +292,16 @@ public class WoodBlockController{
 
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
-            node1 = new DraggableNodeC();
+            node1 = new DraggableNodeT270();
             node1.setPane(gameMatrix);
             node1.setID(1);
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
-            node2 = new DraggableNodeC();
+            node2 = new DraggableNodeT270();
             node2.setPane(gameMatrix);
             node2.setID(2);
 
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
-            node3 = new DraggableNodeC();
+            node3 = new DraggableNodeT270();
             node3.setPane(gameMatrix);
 
 
