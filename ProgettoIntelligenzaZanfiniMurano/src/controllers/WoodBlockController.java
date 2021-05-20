@@ -7,11 +7,18 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import modal.*;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -86,6 +93,8 @@ public class WoodBlockController{
   private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
 
   private static Handler handler;
+
+  private Service<Output> process;
   
 
   public void init(Stage g) throws Exception { 
@@ -113,9 +122,9 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception{
 
-    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
+    //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-    //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
+    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
     try {
       ASPMapper.getInstance().registerClass(DraggableNode.class);
@@ -161,31 +170,36 @@ public class WoodBlockController{
     //handler.addOption(option);
     //handler.addOption(option2);
 
-        
-    add_temporary_facts(handler);
-    o = handler.startSync(); 
-    next_move(o);
-
-     
-    facts.clearAll();
-    handler.removeProgram(facts);
-    add_temporary_facts(handler);
-    o = handler.startSync();
-    next_move(o);
-    
-    facts.clearAll();
-    handler.removeProgram(facts);
-    add_temporary_facts(handler);
-    o = handler.startSync();   
-    next_move(o);
-
+    Task<Void> task = new Task<Void>() {
+      boolean play = true;
+      int i = 0;
+      @Override
+      public Void call() {
+          while(play) {
+            try {
+              Thread.sleep(3000);
+              facts.clearAll();
+              handler.removeProgram(facts);
+              add_temporary_facts(handler);
+              o = handler.startSync(); 
+            } catch(Exception e) {
+              System.out.println(e.getMessage());
+            }
   
-    facts.clearAll();
-    handler.removeProgram(facts);
-    add_temporary_facts(handler);
-    o = handler.startSync();   
-    next_move(o);
+            Platform.runLater(() -> {
+              play = next_move(o);
+              i++;
+            });
+          }
 
+          return null;
+      }
+  };
+
+  ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+  executorService.schedule(task, 2, TimeUnit.SECONDS);
+  
   }
    
   private boolean next_move(Output o)  {
@@ -194,13 +208,12 @@ public class WoodBlockController{
     AnswerSets answersets = (AnswerSets) o;
     System.out.println("ans " + answersets.getAnswerSetsString());
 
-    for(AnswerSet a:answersets.getAnswersets()){
-      try {
+    for(AnswerSet a:answersets.getAnswersets()) {
+      try { 
         for(Object obj:a.getAtoms()){
           System.out.println(obj.toString());
           if(obj instanceof DraggableNode){
             DraggableNode block = (DraggableNode) obj;
-            block.print(); 
             if(block.getID() == 1){
               node1.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node1);
               borderpane.getChildren().remove(node1);
@@ -528,10 +541,7 @@ public class WoodBlockController{
       return record;
     }
 
-    private void add_temporary_facts(Handler handler){
-      facts.clearAll();
-      facts.clearPrograms();
-   
+    private void add_temporary_facts(Handler handler){ 
       for(int i=0; i<SIZE ; i++) {
 			  for(int j=0; j<SIZE; j++) {
 				  if(GameMatrix.get(i, j) != 0) { // aggiungo ai fatti le caselle già riempite 

@@ -1,9 +1,12 @@
-pos(1..9).
+pos(0..9).
 :-#count{N,X,Y : in(N,X,Y,_)}>1.
 :-#count{N,X,Y : in(N,X,Y,_)}=0.
 
 
 in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
-:-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y),full(X+1,Y),full(X,Y+1),full(X+1,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeC"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeC"),full(X+1,Y+1).
 :-in(ID,X,Y,"modal.DraggableNodeC"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeC"),Y+1>9.
