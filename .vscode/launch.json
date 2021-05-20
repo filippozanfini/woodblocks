@@ -1,0 +1,90 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "application.Main",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.Tool",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRig",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.gui.TestRig",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch FlexibleHashMap",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.FlexibleHashMap",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch FlexibleHashMap(1)",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.FlexibleHashMap",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch LogManager",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.LogManager",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch LogManager(1)",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.LogManager",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRig(1)",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.TestRig",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRig(2)",
+            "request": "launch",
+            "mainClass": "org.antlr.v4.runtime.misc.TestRig",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch STViz",
+            "request": "launch",
+            "mainClass": "org.stringtemplate.v4.gui.STViz",
+            "projectName": "ProgettoIntelligenzaZanfiniMurano"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainClass",
+            "request": "launch",
+            "mainClass": "mat.unical.it.embasp.sudoku.MainClass"
+        }
+    ]
+}

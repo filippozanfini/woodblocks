@@ -6,6 +6,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
 @Id("in")
@@ -26,6 +29,7 @@ public class DraggableNodeL270 extends DraggableNode {
     private Rectangle rectangle4;
 
     public DraggableNodeL270() {
+       
         super();
         rectangle1 = new Rectangle(42,42,Color.web("A1866B")); 
         rectangle2 = new Rectangle(42,42,Color.web("A1866B")); 
