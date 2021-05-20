@@ -1,24 +1,19 @@
-
 package controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import application.Main;
-import modal.DraggableNode;
-import modal.GameMatrix;
+import modal.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -34,14 +29,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
+import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.languages.IllegalAnnotationException;
 import it.unical.mat.embasp.languages.ObjectNotValidException;
@@ -50,7 +42,6 @@ import it.unical.mat.embasp.languages.asp.ASPMapper;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 import it.unical.mat.embasp.languages.asp.AnswerSets;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
-import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
 import it.unical.mat.embasp.specializations.dlv2.desktop.DLV2DesktopService;
 
 public class WoodBlockController{
@@ -75,62 +66,24 @@ public class WoodBlockController{
 
     @FXML
     private Label currentRecord;
+
     private DraggableNode node1;
     private DraggableNode node2;
     private DraggableNode node3;
-    
     private int nodeCount;
     private GameMatrix matrix;
     private Stage stage;
 
-    private static String encodingResource="encodings/woodblock";
+    private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
 	
 	  private static Handler handler;
     
  
-    public void init(Stage g) { 
+    public void init(Stage g) throws Exception { 
+     
       stage = g;
       matrix = GameMatrix.getInstance();
-     
       currentRecord.setText("0");
-
-      // EMBASP
-
-      //Se si esegue la demo su Windows 64bit scommentare la seguente istruzione:
-		  // handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2.exe"));
-
-		  //Se si esegue la demo su Linux 64bit scommentare la seguente istruzione:
-		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-		
-		  //Se si esegue la demo su MacOS 64bit scommentare la seguente istruzione:
-		  handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
-
-      try {
-        ASPMapper.getInstance().registerClass(DraggableNode.class);
-      } catch (ObjectNotValidException | IllegalAnnotationException e1) {
-        e1.printStackTrace();
-      }
-
-      InputProgram facts = new ASPInputProgram();
-		  for(int i=0;i<10;i++) {
-			  for(int j=0;j<10;j++) {
-				  if(GameMatrix.get(i, j) != 0) {
-					  try {
-						  facts.addObjectInput(Class.forName(GameMatrix.getType(i, j)).newInstance());
-					  } catch (Exception e) {
-						  e.printStackTrace();
-					  }
-				  }
-			  }
-		  }
-
-      handler.addProgram(facts);
-
-      InputProgram encoding = new ASPInputProgram();
-		  encoding.addFilesPath(encodingResource);
-
-      handler.addProgram(encoding);
-
     	initBlocks(); 
 
       try {
@@ -144,11 +97,172 @@ public class WoodBlockController{
       } catch(IOException e) {
         e.printStackTrace();
       } 
+      init_embasp();
     }
+
+    // EMBASP
+    public void init_embasp() throws Exception{
+
+      handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
+		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
+		  //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2-mac"));
+
+      try {
+        ASPMapper.getInstance().registerClass(DraggableNode.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeB.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeC.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeI2H.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeI2V.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeIH.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeIV.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL2.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL290.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeL2270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeS270.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT90.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT180.class);
+        ASPMapper.getInstance().registerClass(DraggableNodeT270.class);
+        ASPMapper.getInstance().registerClass(Block.class);
+        ASPMapper.getInstance().registerClass(FullCell.class);
+
+      } catch (ObjectNotValidException | IllegalAnnotationException e1) {
+        e1.printStackTrace();
+        System.out.println("errore");
+      }
+
+    // 1. carico i blocchi da aggiungere come fatti
+    // 2. carico le caselle piene come fatti
+    System.out.println("sono qui 2");
+
+
+      InputProgram facts = new ASPInputProgram();
+
+		  for(int i=0;i<10;i++) {
+			  for(int j=0;j<10;j++) {
+				  if(GameMatrix.get(i, j) != 0) { // aggiungo ai fatti le caselle già riempite 
+					  try {
+              System.out.println("piena "+ i+" "+j);
+						  facts.addObjectInput(new FullCell(i,j));
+					  } catch (Exception e) {
+						  e.printStackTrace();
+					  }
+				  }
+			  }
+		  }
+      
+      System.out.println("sono qui 3");
+      System.out.println("node 1 type = "+ node1.getType());
+      Block b1 = new Block(1,node1.getType());
+      Block b2 = new Block(2,node2.getType());
+      Block b3 = new Block(3,node3.getType());
+
+      facts.addObjectInput(b1);
+      facts.addObjectInput(b2);
+      facts.addObjectInput(b3);
+
+      handler.addProgram(facts);
+      
+      InputProgram encoding = new ASPInputProgram();
+		  encoding.addFilesPath(encodingResource);
+
+      handler.addProgram(encoding);
+      OptionDescriptor option = new OptionDescriptor("--filter=in/4");
+      OptionDescriptor option2= new OptionDescriptor("--filter=block/2");
+
+      handler.addOption(option);
+    //  handler.addOption(option2);
+
+      /* OptionDescriptor option2 = new OptionDescriptor("-n0");  
+      handler.addOption(option2); */
+
+      Output o =  handler.startSync();
+      AnswerSets answersets = (AnswerSets) o;
+      System.out.println("ans " + answersets.getAnswerSetsString());
+    
+      for(AnswerSet a:answersets.getAnswersets()){
+        try {
+          for(Object obj:a.getAtoms()){
+            System.out.println(obj.toString());
+            if(obj instanceof DraggableNode){
+            
+              DraggableNode block = (DraggableNode) obj;
+              System.out.println("dopo");
+
+              block.print(); 
+             if(block.getID() == 1){
+                System.out.println("tipo 1");
+                node1.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node1);
+                System.out.println("node 1" + node1);
+                borderpane.getChildren().remove(node1);
+                  
+
+                incrementCurrentRecord(node1);
+              }
+              else if(block.getID() == 2){
+                System.out.println("tipo 2");
+                node2.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node2);
+                borderpane.getChildren().remove(node2);
+                incrementCurrentRecord(node2);
+            }
+              else if(block.getID() == 3){
+                System.out.println("tipo 3");
+                node3.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node3);
+                borderpane.getChildren().remove(node3);
+                incrementCurrentRecord(node3);
+              }
+
+            int spaceCount = 0;
+            
+            if(borderpane.getChildren().contains(node2)) {
+              if(GameMatrix.checkBlockAvailability(node2)) {
+                spaceCount++;
+              }
+            }
+
+            if(borderpane.getChildren().contains(node3)) {
+              if(GameMatrix.checkBlockAvailability(node3)) {
+                spaceCount++;
+              }
+            }
+
+            if((borderpane.getChildren().contains(node2) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
+              gameOverAlert();
+              return;
+            }
+          
+            if(nodeCount == 1) {
+              System.out.println("node count "+ nodeCount);
+              initBlocks();
+            } else {
+              nodeCount--;
+            }
+          
+            GameMatrix.add(block.getRow(), block.getCol(), block.getType());
+          }
+          }
+        } catch (IllegalAccessException e) {
+          e.printStackTrace();
+          System.out.println("errore ");
+        } 
         
+      }
+      //Visualizziamo la griglia cos� ottenuta
+      //displayMatrix();
+      
+      //In alternativa l'handler pu� invocare DLV2 in modo ASINCRONO.
+      //handler.startAsync(new MyCallback(sudokuMatrix));
+    }
     @FXML
     void goBack(ActionEvent event) {
-      /*FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
+      FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
       BorderPane root2;
       try {
           root2 = (BorderPane) loader2.load();
@@ -159,33 +273,42 @@ public class WoodBlockController{
           stage.show();
       } catch (IOException e) {
           e.printStackTrace();
-      }*/
-      gameOverAlert();
+      }
+     
     
     }
     
     private void initBlocks() {
     	nodeCount = 3;
-    	
+     
+
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            //node1 = new DraggableNodeC();
             node1.setPane(gameMatrix);
+            node1.setID(1);
+           // node2 = new DraggableNodeC();
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
             node2.setPane(gameMatrix);
+            node2.setID(2);
+
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
+           // node3 = new DraggableNodeB();
             node3.setPane(gameMatrix);
+            node3.setID(3);
+
           } catch (InstantiationException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
           } catch (IllegalAccessException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
           } catch (ClassNotFoundException e1) {
-            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          } catch (Exception e1) {
             e1.printStackTrace();
           }
-    
-    	
+      
+      
+        
     	node1.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
             if(node1.setColor(gameMatrix, true)) {
               incrementCurrentRecord(node1);
@@ -302,6 +425,7 @@ public class WoodBlockController{
       borderpane.getChildren().add(node1);
       borderpane.getChildren().add(node2);
       borderpane.getChildren().add(node3);
+      
 
       if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
         gameOverAlert();
@@ -324,6 +448,7 @@ public class WoodBlockController{
           Random random = new Random();
           int n = random.nextInt(22);
           String name = cls[n];
+
         return name;
     }
 
@@ -345,7 +470,8 @@ public class WoodBlockController{
       alert.getButtonTypes().setAll(okButton, exitButton);
       alert.showAndWait().ifPresent(type ->  {
       if (type == okButton) {
-        saveRecordOnFile(); 
+        saveRecordOnFile();
+        GameMatrix.cleanAll(); 
         restart();
       } else {
         saveRecordOnFile();
@@ -361,7 +487,11 @@ public class WoodBlockController{
       try {
           root2 = (BorderPane) loader2.load();
           WoodBlockController rc = loader2.getController();
-          rc.init(stage);
+          try {
+            rc.init(stage);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
           Scene scene = new Scene(root2,735,750);
           stage.setScene(scene);
           stage.show();

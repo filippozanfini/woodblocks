@@ -157,4 +157,14 @@ public class GameMatrix {
 
         return false;
     }
+    public static void cleanAll() {
+        for(int i=0; i<10; i++) {
+            for(int j=0; j<10; j++) {
+                remove(i,j);
+                matrix[i][j] = 0;
+                typeBlockMatrix[i][j] = "";
+
+                }
+            }
+        }
 }
