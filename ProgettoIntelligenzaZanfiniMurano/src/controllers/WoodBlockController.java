@@ -92,15 +92,13 @@ public class WoodBlockController{
   private Output o;
   private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
 
-  private static Handler handler;
-
-  private Service<Output> process;
-  
+  private static Handler handler;  
 
   public void init(Stage g) throws Exception { 
     
     stage = g;
     matrix = GameMatrix.getInstance();
+    GameMatrix.cleanAll();
     facts = new ASPInputProgram();
     currentRecord.setText("0");
     initBlocks(); 
@@ -116,6 +114,7 @@ public class WoodBlockController{
     } catch(IOException e) {
       e.printStackTrace();
     } 
+
     init_embasp();
   }
 
@@ -161,6 +160,10 @@ public class WoodBlockController{
   
   //InputProgram facts = new ASPInputProgram();
      // fatti variabili
+
+    facts.clearAll();
+    handler.removeProgram(facts);
+    handler.removeAll();
       
     InputProgram encoding = new ASPInputProgram();
     encoding.addFilesPath(encodingResource);
@@ -172,12 +175,11 @@ public class WoodBlockController{
 
     Task<Void> task = new Task<Void>() {
       boolean play = true;
-      int i = 0;
       @Override
       public Void call() {
           while(play) {
             try {
-              Thread.sleep(3000);
+              Thread.sleep(500);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
@@ -188,7 +190,7 @@ public class WoodBlockController{
   
             Platform.runLater(() -> {
               play = next_move(o);
-              i++;
+              // GameMatrix.checkFull(gameMatrix);
             });
           }
 
@@ -203,10 +205,8 @@ public class WoodBlockController{
   }
    
   private boolean next_move(Output o)  {
-    GameMatrix.checkFull(gameMatrix);
-    System.out.println("next move");
     AnswerSets answersets = (AnswerSets) o;
-    System.out.println("ans " + answersets.getAnswerSetsString());
+    // System.out.println("ans " + answersets.getAnswerSetsString());
 
     for(AnswerSet a:answersets.getAnswersets()) {
       try { 

@@ -1,4 +1,5 @@
 package modal;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import it.unical.mat.embasp.languages.Id;
@@ -122,16 +123,25 @@ public class DraggableNodeC extends DraggableNode {
             gameMatrix.getChildren().remove(rectangle4);
         }
         private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
-            gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
-            gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+1, y);
-            gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y+1);
-            gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x+1, y+1);
+        
+            Random rng = new Random();
+            int c = rng.nextInt();
+            int r = c & 255;
+            int g = (c >>> 8) & 255;
+            int b = (c >>> 16) & 255;
+            double op = (c >>> 24) / 255.0;
+            Color color = Color.rgb(r, g, b, 1);
+            
+            gameMatrix.add(new Rectangle(42,42,color),x, y);
+            gameMatrix.add(new Rectangle(42,42,color),x+1, y);
+            gameMatrix.add(new Rectangle(42,42,color),x, y+1);
+            gameMatrix.add(new Rectangle(42,42,color),x+1, y+1);
     
             GameMatrix.add(x, y, this.getType());
             GameMatrix.add(x+1, y, this.getType());
             GameMatrix.add(x, y+1, this.getType());
             GameMatrix.add(x+1, y+1, this.getType());
-            GameMatrix.checkFull(gameMatrix);
+            
         }
        
       
