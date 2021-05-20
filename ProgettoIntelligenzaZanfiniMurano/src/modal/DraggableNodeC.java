@@ -93,14 +93,7 @@ public class DraggableNodeC extends DraggableNode {
               node.setLayoutX(150);
               node.setLayoutY(550);
               aggiungiBlocco(gameMatrix, x, y);
-            /*  Timer timer = new Timer();
-              timer.schedule(new TimerTask(){
-                  
-                @Override
-                public void run() {
-                    aggiungiBlocco(gameMatrix, x, y);
-                }
-              }, 1000);*/
+       
                      
               return true;
             }
@@ -129,7 +122,6 @@ public class DraggableNodeC extends DraggableNode {
             int r = c & 255;
             int g = (c >>> 8) & 255;
             int b = (c >>> 16) & 255;
-            double op = (c >>> 24) / 255.0;
             Color color = Color.rgb(r, g, b, 1);
             
             gameMatrix.add(new Rectangle(42,42,color),x, y);

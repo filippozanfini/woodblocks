@@ -89,14 +89,7 @@ public class DraggableNodeL2 extends DraggableNode {
           node.setLayoutX(150);
           node.setLayoutY(550);
           aggiungiBlocco(gameMatrix, x, y);
-        /*  Timer timer = new Timer();
-          timer.schedule(new TimerTask(){
-              
-            @Override
-            public void run() {
-                aggiungiBlocco(gameMatrix, x, y);
-            }
-          }, 1000);*/
+
                  
           return true;
         }
@@ -135,7 +128,6 @@ public class DraggableNodeL2 extends DraggableNode {
         GameMatrix.add(x, y+1, this.getType());
         GameMatrix.add(x, y+2, this.getType());
         GameMatrix.add(x+2, y+2, this.getType());
-        GameMatrix.checkFull(gameMatrix);
     }
 
 }

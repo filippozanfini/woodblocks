@@ -81,16 +81,7 @@ public class DraggableNodeB extends DraggableNode {
           node.setLayoutX(150);
           node.setLayoutY(550);
           aggiungiBlocco(gameMatrix, x, y);
-          
-        /*  Timer timer = new Timer();
-          timer.schedule(new TimerTask(){
-              
-            @Override
-            public void run() {
-                aggiungiBlocco(gameMatrix, x, y);
-            }
-          }, 1000);*/
-                 
+    
           return true;
         }
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
@@ -109,6 +100,5 @@ public class DraggableNodeB extends DraggableNode {
     private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
         GameMatrix.add(x, y, this.getType());
-        GameMatrix.checkFull(gameMatrix);
     }
 }

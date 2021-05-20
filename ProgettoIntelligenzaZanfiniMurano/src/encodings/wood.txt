@@ -4,6 +4,13 @@ pos(0..9).
 
 in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
 
+% DraggableNodeB
+
+:-in(ID,X,Y,"modal.DraggableNodeB"),full(X,Y).
+
+%%%%%%%%%%
+
+
 % DraggableNodeC
 
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X,Y).
@@ -12,6 +19,122 @@ in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(
 :-in(ID,X,Y,"modal.DraggableNodeC"),full(X+1,Y+1).
 :-in(ID,X,Y,"modal.DraggableNodeC"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeC"),Y+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeI2H
+
+:-in(ID,X,Y,"modal.DraggableNodeI2H"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeI2H"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeI2H"),X+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeI2V
+
+:-in(ID,X,Y,"modal.DraggableNodeI2V"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeI2V"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeI2V"),Y+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeIH
+
+:-in(ID,X,Y,"modal.DraggableNodeIH"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeIH"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeIH"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeIH"),full(X+3,Y).
+:-in(ID,X,Y,"modal.DraggableNodeIH"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeIH"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeIH"),X+3>9.
+
+%%%%%%%%%%
+
+% DraggableNodeIV
+
+:-in(ID,X,Y,"modal.DraggableNodeIV"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeIV"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeIV"),full(X,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeIV"),full(X,Y+3).
+:-in(ID,X,Y,"modal.DraggableNodeIV"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeIV"),Y+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeIV"),Y+3>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL
+
+:-in(ID,X,Y,"modal.DraggableNodeL"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL"),full(X+1,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL"),full(X,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL"),Y+2>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL90
+
+:-in(ID,X,Y,"modal.DraggableNodeL90"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL90"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL90"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL90"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL90"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL90"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL90"),Y+1>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL180
+
+:-in(ID,X,Y,"modal.DraggableNodeL180"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL180"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL180"),full(X+1,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL180"),full(X+1,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL180"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL180"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL180"),Y+2>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL270
+
+:-in(ID,X,Y,"modal.DraggableNodeL270"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL270"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL270"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL270"),full(X+2,Y-1).
+:-in(ID,X,Y,"modal.DraggableNodeL270"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL270"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL270"),Y-1<0.
+
+%%%%%%%%%%
+
+% DraggableNodeL2
+
+:-in(ID,X,Y,"modal.DraggableNodeL2"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL2"),full(X+1,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL2"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL2"),full(X,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL2"),full(X+2,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL2"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL2"),Y+2>9.
+
+%%%%%%%%%%
+
+% DraggableNodeL290
+
+:-in(ID,X,Y,"modal.DraggableNodeL290"),full(X,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL290"),full(X+1,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL290"),full(X+2,Y).
+:-in(ID,X,Y,"modal.DraggableNodeL290"),full(X,Y+1).
+:-in(ID,X,Y,"modal.DraggableNodeL290"),full(X,Y+2).
+:-in(ID,X,Y,"modal.DraggableNodeL290"),X+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL290"),X+2>9.
+:-in(ID,X,Y,"modal.DraggableNodeL290"),Y+1>9.
+:-in(ID,X,Y,"modal.DraggableNodeL290"),Y+2>9.
 
 %%%%%%%%%%
 
