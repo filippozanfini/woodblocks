@@ -91,7 +91,7 @@ public class WoodBlockController{
   private Block b3;
   private Output o;
   private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
-
+  private ScheduledExecutorService executorService;
   private static Handler handler;  
 
   public void init(Stage g) throws Exception { 
@@ -121,9 +121,9 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception{
 
-    //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
+    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
+    //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
     try {
       ASPMapper.getInstance().registerClass(DraggableNode.class);
@@ -150,6 +150,8 @@ public class WoodBlockController{
       ASPMapper.getInstance().registerClass(DraggableNodeT270.class);
       ASPMapper.getInstance().registerClass(Block.class);
       ASPMapper.getInstance().registerClass(FullCell.class);
+      ASPMapper.getInstance().registerClass(NewFull.class);
+
 
     } catch (ObjectNotValidException | IllegalAnnotationException e1) {
       e1.printStackTrace();
@@ -170,8 +172,10 @@ public class WoodBlockController{
     handler.addProgram(encoding);
     OptionDescriptor option = new OptionDescriptor("--filter=in/4");
     OptionDescriptor option2= new OptionDescriptor("--filter=block/2");
+
     //handler.addOption(option);
     //handler.addOption(option2);
+
 
     Task<Void> task = new Task<Void>() {
       boolean play = true;
@@ -179,79 +183,67 @@ public class WoodBlockController{
       public Void call() {
           while(play) {
             try {
-              Thread.sleep(2000);
+              Thread.sleep(500);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
               o = handler.startSync(); 
+              if(next(o) == false)
+                break;
             } catch(Exception e) {
               System.out.println(e.getMessage());
             }
   
             Platform.runLater(() -> {
               play = next_move(o);
-              GameMatrix.checkFull(gameMatrix);
+              
             });
           }
-
+          
+              
           return null;
       }
   };
 
-  ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-  executorService.schedule(task, 2, TimeUnit.SECONDS);
-  
+  executorService = Executors.newSingleThreadScheduledExecutor();
+  executorService.schedule(task, 1, TimeUnit.SECONDS);
   }
    
   private boolean next_move(Output o)  {
     AnswerSets answersets = (AnswerSets) o;
-    // System.out.println("ans " + answersets.getAnswerSetsString());
-
+    System.out.println("ans " + answersets.getAnswerSetsString());
+    GameMatrix.checkFull(gameMatrix);
+    boolean trovato = false;
+    DraggableNode block = null;
+    
     for(AnswerSet a:answersets.getAnswersets()) {
       try { 
         for(Object obj:a.getAtoms()){
-          System.out.println(obj.toString());
+          //System.out.println(obj.toString());
           if(obj instanceof DraggableNode){
-            DraggableNode block = (DraggableNode) obj;
+            block = (DraggableNode) obj;
             if(block.getID() == 1){
               node1.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node1);
               borderpane.getChildren().remove(node1);
               incrementCurrentRecord(node1);
+              trovato = true;
+
             }
             else if(block.getID() == 2){
-                    node2.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node2);
-                    borderpane.getChildren().remove(node2);
-                    incrementCurrentRecord(node2);
+              node2.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node2);
+              borderpane.getChildren().remove(node2);
+              incrementCurrentRecord(node2);
+              trovato = true;
             }
             else if(block.getID() == 3){
-                node3.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node3);
-                borderpane.getChildren().remove(node3);
-                incrementCurrentRecord(node3);
-              
-            }
-
-            int spaceCount = 0;
+              node3.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node3);
+              borderpane.getChildren().remove(node3);
+              incrementCurrentRecord(node3);
+              trovato = true;
             
-            if(borderpane.getChildren().contains(node2)) {
-              if(GameMatrix.checkBlockAvailability(node2)) {
-                spaceCount++;
-              }
-            }
-
-            if(borderpane.getChildren().contains(node3)) 
-              if(GameMatrix.checkBlockAvailability(node3)) {
-                spaceCount++;
-              }
-          
-
-            if((borderpane.getChildren().contains(node2) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
-              gameOverAlert();
-              return false;
             }
         
             if(nodeCount == 1) {
-              //System.out.println("node count "+ nodeCount);
               initBlocks();
             } else {
               nodeCount--;
@@ -264,9 +256,25 @@ public class WoodBlockController{
         e.printStackTrace();
       } 
     } 
+    if(!trovato || block == null ){
+      executorService.shutdown();
+      gameOverAlert();
+      return false;
+    }
     return true;
   }
-
+  public boolean next(Output o)  {
+    AnswerSets answersets = (AnswerSets) o;
+    for(AnswerSet a:answersets.getAnswersets()) {
+      try { 
+        for(Object obj:a.getAtoms())
+          if(obj instanceof DraggableNode)
+           return true;
+      }catch(Exception e){e.printStackTrace();}
+    }
+    return false;
+  }
+            
 
     @FXML
     void goBack(ActionEvent event) {
@@ -292,12 +300,15 @@ public class WoodBlockController{
 
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
+          //  node1 = new DraggableNodeC();
             node1.setPane(gameMatrix);
             node1.setID(1);
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
+            //node2 = new DraggableNodeC();
             node2.setPane(gameMatrix);
             node2.setID(2);
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
+           // node3 = new DraggableNodeC();
             node3.setPane(gameMatrix);
             node3.setID(3);
 
@@ -368,6 +379,7 @@ public class WoodBlockController{
               }
 
               if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
+                executorService.shutdown();
                 gameOverAlert();
                 return;
               }
@@ -432,6 +444,7 @@ public class WoodBlockController{
       
 
       if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
+        executorService.shutdown();
         gameOverAlert();
         return;
       }
@@ -540,7 +553,7 @@ public class WoodBlockController{
 			  for(int j=0; j<SIZE; j++) {
 				  if(GameMatrix.get(i, j) != 0) { // aggiungo ai fatti le caselle già riempite 
 					  try {
-                System.out.println("piena "+ i + " " + j);
+               // System.out.println("piena "+ i + " " + j);
                 facts.addObjectInput(new FullCell(i,j));
             } catch (Exception e) {
                 e.printStackTrace();
