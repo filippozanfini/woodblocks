@@ -4,23 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import modal.*;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -41,7 +34,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
@@ -90,7 +82,7 @@ public class WoodBlockController{
   private Block b2;
   private Block b3;
   private Output o;
-  private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
+  private static String encodingResource="src/encodings/wood.txt";
   private ScheduledExecutorService executorService;
   private static Handler handler;  
 
@@ -121,7 +113,7 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception{
 
-    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2.exe"));
+    handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
     //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
@@ -183,7 +175,7 @@ public class WoodBlockController{
       public Void call() {
           while(play) {
             try {
-              Thread.sleep(500);
+              Thread.sleep(1000);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
@@ -207,11 +199,12 @@ public class WoodBlockController{
 
   executorService = Executors.newSingleThreadScheduledExecutor();
   executorService.schedule(task, 1, TimeUnit.SECONDS);
+
   }
    
   private boolean next_move(Output o)  {
     AnswerSets answersets = (AnswerSets) o;
-    System.out.println("ans " + answersets.getAnswerSetsString());
+    System.out.println("ans " + answersets.getAnswersets());
     GameMatrix.checkFull(gameMatrix);
     boolean trovato = false;
     DraggableNode block = null;
