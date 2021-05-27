@@ -86,7 +86,8 @@ public class WoodBlockController{
   private static String encodingResource="src/encodings/wood.txt";
   private ScheduledExecutorService executorService;
   private static Handler handler;  
-
+  private boolean play;
+  private boolean showAlert;
   public void init(Stage g) throws Exception { 
     
     stage = g;
@@ -177,9 +178,11 @@ public class WoodBlockController{
 
 
     Task<Void> task = new Task<Void>() {
-      boolean play = true;
+    	
       @Override
       public Void call() {
+    	  play = true;
+    	  showAlert = false;
           while(play) {
             try {
               Thread.sleep(500);
@@ -205,7 +208,7 @@ public class WoodBlockController{
   };
 
   executorService = Executors.newSingleThreadScheduledExecutor();
-  executorService.schedule(task, 500, TimeUnit.MILLISECONDS);
+  executorService.schedule(task, 1, TimeUnit.SECONDS);
 
 	
 
@@ -259,11 +262,15 @@ public class WoodBlockController{
         e.printStackTrace();
       } 
     } 
+   
     if(!trovato || block == null ){
       executorService.shutdown();
+      System.out.println("dentro if" + play);
+      play = false;
       gameOverAlert();
       return false;
     }
+    
     return true;
   }
   public boolean next(Output o)  {
@@ -281,6 +288,10 @@ public class WoodBlockController{
 		}
       
     }
+    executorService.shutdown();
+    System.out.println("play : "+ play);
+    gameOverAlert();
+    play = false;
     return false;
   }
             
@@ -468,18 +479,19 @@ public class WoodBlockController{
     private String randomblock(){
 
     	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeL90", "modal.DraggableNodeL180", "modal.DraggableNodeL270", 
-    			 "modal.DraggableNodeT",
-    			"modal.DraggableNodeT90", "modal.DraggableNodeT180", "modal.DraggableNodeT270", "modal.DraggableNodeIH", "modal.DraggableNodeIV", 
-    			"modal.DraggableNodeI2H", "modal.DraggableNodeI2V", "modal.DraggableNodeS", "modal.DraggableNodeS90", "modal.DraggableNodeS180", 
-    			"modal.DraggableNodeS270", "modal.DraggableNodeC", "modal.DraggableNodeB"};
+    			 "modal.DraggableNodeT", "modal.DraggableNodeT180", "modal.DraggableNodeIH", "modal.DraggableNodeIV", 
+    			 "modal.DraggableNodeI2H","modal.DraggableNodeI2V", "modal.DraggableNodeS", 
+    			 "modal.DraggableNodeS270","modal.DraggableNodeC", "modal.DraggableNodeB"};
           Random random = new Random();
-          int n = random.nextInt(18);
+          int n = random.nextInt(13);
           String name = cls[n];
 
         return name;
     }
 
     private void gameOverAlert() {
+    	if(showAlert == true)
+    		return;
       Image image = new Image("/assets/game_over.png",100,50, false, false);
       ImageView imageView = new ImageView(image);
       Alert alert = new Alert(AlertType.WARNING);
@@ -491,7 +503,9 @@ public class WoodBlockController{
       alert.setTitle("GAME OVER");
       alert.initStyle(StageStyle.UNDECORATED);
       alert.getDialogPane().setPadding(new Insets(30));
-     
+      
+      showAlert = true;
+      
       ButtonType okButton = new ButtonType("Ricomincia", ButtonData.YES);
       ButtonType exitButton = new ButtonType("Esci", ButtonData.NO);
       alert.getButtonTypes().setAll(okButton, exitButton);

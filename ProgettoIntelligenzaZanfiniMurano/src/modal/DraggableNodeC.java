@@ -117,12 +117,7 @@ public class DraggableNodeC extends DraggableNode {
         }
         private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
         
-            Random rng = new Random();
-            int c = rng.nextInt();
-            int r = c & 255;
-            int g = (c >>> 8) & 255;
-            int b = (c >>> 16) & 255;
-            Color color = Color.rgb(r, g, b, 1);
+           Color color = Color.web("725A42"); 
             
             gameMatrix.add(new Rectangle(42,42,color),x, y);
             gameMatrix.add(new Rectangle(42,42,color),x+1, y);
