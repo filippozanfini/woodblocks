@@ -5,8 +5,9 @@ pos(0..9).
 in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
 
 % DraggableNodeB
-
 :-in(ID,X,Y,"modal.DraggableNodeB"),full(X,Y).
+new_full(A,B):-A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeB").
+
 
 %%%%%%%%%%
 
@@ -19,10 +20,10 @@ in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(
 :-in(ID,X,Y,"modal.DraggableNodeC"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeC"),Y+1>9.
 
-new_full(A,B):-A=X,B=Y,pos(X),pos(Y),in(ID,X,Y,"modal.DraggableNodeC").
-new_full(A,B):-A=X+1,B=Y,pos(X+1),pos(Y),in(ID,X,Y,"modal.DraggableNodeC").
-new_full(A,B):-A=X,B=Y+1,pos(X),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
-new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeC").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeC").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeC").
+new_full(A,B):- A=X+1,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeC").
 
 
 %%%%%%%%%%
@@ -33,6 +34,9 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeI2H"),full(X+1,Y).
 :-in(ID,X,Y,"modal.DraggableNodeI2H"),X+1>9.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeI2H").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeI2H").
+
 %%%%%%%%%%
 
 % DraggableNodeI2V
@@ -40,6 +44,9 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeI2V"),full(X,Y).
 :-in(ID,X,Y,"modal.DraggableNodeI2V"),full(X,Y+1).
 :-in(ID,X,Y,"modal.DraggableNodeI2V"),Y+1>9.
+
+new_full(A,B):-A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeI2V").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeI2V").
 
 %%%%%%%%%%
 
@@ -53,6 +60,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeIH"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeIH"),X+3>9.
 
+new_full(A,B):- A=X,B=Y,pos(X),pos(Y),in(ID,X,Y,"modal.DraggableNodeIH").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIH").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIH").
+new_full(A,B):- A=X+3,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIH").
+
 %%%%%%%%%%
 
 % DraggableNodeIV
@@ -64,6 +76,12 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeIV"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeIV"),Y+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeIV"),Y+3>9.
+
+
+new_full(A,B):- A=X,B=Y,pos(X),pos(Y),in(ID,X,Y,"modal.DraggableNodeIV").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIV").
+new_full(A,B):- A=X,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIV").
+new_full(A,B):- A=X,B=Y+3,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeIV").
 
 %%%%%%%%%%
 
@@ -77,6 +95,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL"),Y+2>9.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL").
+new_full(A,B):- A=X+1,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL").
+new_full(A,B):- A=X,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL").
+
 %%%%%%%%%%
 
 % DraggableNodeL90
@@ -88,6 +111,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL90"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL90"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeL90"),Y+1>9.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL90").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL90").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL90").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL90").
 
 %%%%%%%%%%
 
@@ -101,6 +129,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL180"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL180"),Y+2>9.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL180").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL180").
+new_full(A,B):- A=X+1,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL180").
+new_full(A,B):- A=X+1,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL180").
+
 %%%%%%%%%%
 
 % DraggableNodeL270
@@ -112,6 +145,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL270"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL270"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeL270"),Y-1<0.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL270").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL270").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL270").
+new_full(A,B):- A=X+2,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL270").
 
 %%%%%%%%%%
 
@@ -127,6 +165,13 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL2"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL2"),Y+2>9.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2").
+new_full(A,B):- A=X+1,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2").
+new_full(A,B):- A=X,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2").
+new_full(A,B):- A=X+2,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2").
+
+
 %%%%%%%%%%
 
 % DraggableNodeL290
@@ -140,6 +185,12 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL290"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeL290"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeL290"),Y+2>9.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL290").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL290").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL290").
+new_full(A,B):- A=X,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL290").
+new_full(A,B):- A=X+2,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL290").
 
 %%%%%%%%%%
 
@@ -155,6 +206,13 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL2180"),Y+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeL2180"),X-1<0.
 
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2180").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2180").
+new_full(A,B):- A=X+1,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2180").
+new_full(A,B):- A=X+1,B=Y+2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2180").
+new_full(A,B):- A=X-1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2180").
+
 %%%%%%%%%%
 
 % DraggableNodeL2270
@@ -169,6 +227,13 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeL2270"),Y-2<0.
 :-in(ID,X,Y,"modal.DraggableNodeL2270"),Y-1<0.
 
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2270").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2270").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2270").
+new_full(A,B):- A=X+2,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2270").
+new_full(A,B):- A=X+2,B=Y-2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeL2270").
+
 %%%%%%%%%%
 
 % DraggableNodeS
@@ -180,6 +245,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeS"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeS"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeS"),Y-1<0.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS").
+new_full(A,B):- A=X+2,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS").
+new_full(A,B):- A=X+1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS").
 
 %%%%%%%%%%
 
@@ -193,6 +263,12 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeS90"),Y+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeS90"),Y-1<0.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS90").
+new_full(A,B):- A=X,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS90").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS90").
+new_full(A,B):- A=X+1,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS90").
+
+
 %%%%%%%%%%
 
 % DraggableNodeS180
@@ -204,6 +280,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeS180"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeS180"),Y-1<0.
 :-in(ID,X,Y,"modal.DraggableNodeS180"),X-1<0.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS180").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS180").
+new_full(A,B):- A=X,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS180").
+new_full(A,B):- A=X-1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS180").
 
 %%%%%%%%%%
 
@@ -217,6 +298,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeS270"),Y-1<0.
 :-in(ID,X,Y,"modal.DraggableNodeS270"),Y-2<0.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS270").
+new_full(A,B):- A=X,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS270").
+new_full(A,B):- A=X+1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS270").
+new_full(A,B):- A=X+1,B=Y-2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeS270").
+
 %%%%%%%%%%
 
 % DraggableNodeT
@@ -228,6 +314,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeT"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeT"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeT"),Y-1<0.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT").
+new_full(A,B):- A=X+1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT").
 
 %%%%%%%%%%
 
@@ -241,6 +332,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeT90"),Y-1<0.
 :-in(ID,X,Y,"modal.DraggableNodeT90"),Y-2<0.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT90").
+new_full(A,B):- A=X,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT90").
+new_full(A,B):- A=X,B=Y-2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT90").
+new_full(A,B):- A=X+1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT90").
+
 %%%%%%%%%%
 
 % DraggableNodeT180
@@ -252,6 +348,11 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeT180"),X+1>9.
 :-in(ID,X,Y,"modal.DraggableNodeT180"),X+2>9.
 :-in(ID,X,Y,"modal.DraggableNodeT180"),Y+1>9.
+
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT180").
+new_full(A,B):- A=X+1,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT180").
+new_full(A,B):- A=X+2,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT180").
+new_full(A,B):- A=X+1,B=Y+1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT180").
 
 %%%%%%%%%%
 
@@ -265,16 +366,25 @@ new_full(A,B):-A=X+1,B=Y+1,pos(X+1),pos(Y+1),in(ID,X,Y,"modal.DraggableNodeC").
 :-in(ID,X,Y,"modal.DraggableNodeT270"),Y-1<0.
 :-in(ID,X,Y,"modal.DraggableNodeT270"),Y-2<0.
 
+new_full(A,B):- A=X,B=Y,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT270").
+new_full(A,B):- A=X,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT270").
+new_full(A,B):- A=X,B=Y-2,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT270").
+new_full(A,B):- A=X-1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT270").
+
 %%%%%%%%%%
 
 
 % WEAK COSTRAINT 
 
-:~ new_full(X,Y),not full(X+1,Y),not full(X,Y+1),not full(X,Y-1),not full(X-1,Y). [10@10,X,Y]
-:~ new_full(X,Y),not full(X+1,Y+1),pos(X+1),pos(Y+1).[1@2,X,Y]
-:~ new_full(X,Y),not full(X,Y+1),pos(X),pos(Y+1).[1@3,X,Y]
-:~ new_full(X,Y),not full(X,Y-1),pos(X),pos(Y-1).[1@4,X,Y]
-:~ new_full(X,Y),not full(X-1,Y),pos(X-1),pos(Y).[1@5,X,Y]
-:~ new_full(X,Y),not full(X-1,Y+1),pos(X-1),pos(Y+1).[1@6,X,Y]
-:~ new_full(X,Y),not full(X-1,Y-1),pos(X-1),pos(Y-1).[1@7,X,Y]
-:~ new_full(X,Y),not full(X+1,Y-1),pos(X+1),pos(Y-1).[1@8,X,Y]
+:~ new_full(X,Y),not full(X+1,Y),not full(X,Y+1),not full(X,Y-1),not full(X-1,Y). [1@2,X,Y]
+%:~ new_full(X,Y),not full(X+1,Y+1),pos(X+1),pos(Y+1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X,Y+1),pos(X),pos(Y+1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X,Y-1),pos(X),pos(Y-1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X-1,Y),pos(X-1),pos(Y).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X-1,Y+1),pos(X-1),pos(Y+1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X-1,Y-1),pos(X-1),pos(Y-1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X+1,Y-1),pos(X+1),pos(Y-1).[1@1,X,Y]
+
+%cell_count(X,C):- new_full(X,_), #count{X,Y: full(X,Y)}=T1, #count{Z,Y: new_full(Z,Y)}=T2, C=T1+T2.
+%cell_count(Y,C):- new_full(_,Y), #count{Y,X: full(X,Y)}=T1, #count{Y,Z: new_full(Z,Y)}=T2, C=T1+T2.
+%:~ cell_count(X,C), C2=10-C, C2>=0. [C2@2, X]

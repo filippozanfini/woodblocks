@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
@@ -118,6 +119,9 @@ public class WoodBlockController{
     //handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
     try {
+	  ASPMapper.getInstance().registerClass(Block.class);
+	  ASPMapper.getInstance().registerClass(FullCell.class);
+      ASPMapper.getInstance().registerClass(CellCount.class);
       ASPMapper.getInstance().registerClass(DraggableNode.class);
       ASPMapper.getInstance().registerClass(DraggableNodeB.class);
       ASPMapper.getInstance().registerClass(DraggableNodeC.class);
@@ -140,13 +144,13 @@ public class WoodBlockController{
       ASPMapper.getInstance().registerClass(DraggableNodeT90.class);
       ASPMapper.getInstance().registerClass(DraggableNodeT180.class);
       ASPMapper.getInstance().registerClass(DraggableNodeT270.class);
-      ASPMapper.getInstance().registerClass(Block.class);
-      ASPMapper.getInstance().registerClass(FullCell.class);
-      ASPMapper.getInstance().registerClass(NewFull.class);
+      
+
 
 
     } catch (ObjectNotValidException | IllegalAnnotationException e1) {
       e1.printStackTrace();
+      System.out.println("errore 1");
     }
 
   // 1. carico i blocchi da aggiungere come fatti
@@ -164,9 +168,12 @@ public class WoodBlockController{
     handler.addProgram(encoding);
     OptionDescriptor option = new OptionDescriptor("--filter=in/4");
     OptionDescriptor option2= new OptionDescriptor("--filter=block/2");
+    OptionDescriptor option3= new OptionDescriptor("--printonlyoptimum");
+
 
     //handler.addOption(option);
     //handler.addOption(option2);
+   // handler.addOption(option3);
 
 
     Task<Void> task = new Task<Void>() {
@@ -175,7 +182,7 @@ public class WoodBlockController{
       public Void call() {
           while(play) {
             try {
-              Thread.sleep(1000);
+              Thread.sleep(500);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
@@ -198,13 +205,17 @@ public class WoodBlockController{
   };
 
   executorService = Executors.newSingleThreadScheduledExecutor();
-  executorService.schedule(task, 1, TimeUnit.SECONDS);
+  executorService.schedule(task, 500, TimeUnit.MILLISECONDS);
 
+	
+
+	  
   }
    
   private boolean next_move(Output o)  {
     AnswerSets answersets = (AnswerSets) o;
     System.out.println("ans " + answersets.getAnswersets());
+
     GameMatrix.checkFull(gameMatrix);
     boolean trovato = false;
     DraggableNode block = null;
@@ -212,7 +223,6 @@ public class WoodBlockController{
     for(AnswerSet a:answersets.getAnswersets()) {
       try { 
         for(Object obj:a.getAtoms()){
-          //System.out.println(obj.toString());
           if(obj instanceof DraggableNode){
             block = (DraggableNode) obj;
             if(block.getID() == 1){
@@ -259,11 +269,17 @@ public class WoodBlockController{
   public boolean next(Output o)  {
     AnswerSets answersets = (AnswerSets) o;
     for(AnswerSet a:answersets.getAnswersets()) {
-      try { 
-        for(Object obj:a.getAtoms())
-          if(obj instanceof DraggableNode)
-           return true;
-      }catch(Exception e){e.printStackTrace();}
+        try {
+			for(Object obj:a.getAtoms())
+			  if(obj instanceof DraggableNode)
+			   return true;
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException | InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+      
     }
     return false;
   }
@@ -297,7 +313,7 @@ public class WoodBlockController{
             node1.setPane(gameMatrix);
             node1.setID(1);
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
-            //node2 = new DraggableNodeC();
+          //  node2 = new DraggableNodeC();
             node2.setPane(gameMatrix);
             node2.setID(2);
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
@@ -307,6 +323,7 @@ public class WoodBlockController{
 
           } catch (InstantiationException e1) {
             e1.printStackTrace();
+            
           } catch (IllegalAccessException e1) {
             e1.printStackTrace();
           } catch (ClassNotFoundException e1) {
@@ -451,12 +468,12 @@ public class WoodBlockController{
     private String randomblock(){
 
     	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeL90", "modal.DraggableNodeL180", "modal.DraggableNodeL270", 
-    			"modal.DraggableNodeL2", "modal.DraggableNodeL290", "modal.DraggableNodeL2180", "modal.DraggableNodeL2270", "modal.DraggableNodeT",
+    			 "modal.DraggableNodeT",
     			"modal.DraggableNodeT90", "modal.DraggableNodeT180", "modal.DraggableNodeT270", "modal.DraggableNodeIH", "modal.DraggableNodeIV", 
     			"modal.DraggableNodeI2H", "modal.DraggableNodeI2V", "modal.DraggableNodeS", "modal.DraggableNodeS90", "modal.DraggableNodeS180", 
     			"modal.DraggableNodeS270", "modal.DraggableNodeC", "modal.DraggableNodeB"};
           Random random = new Random();
-          int n = random.nextInt(22);
+          int n = random.nextInt(18);
           String name = cls[n];
 
         return name;
