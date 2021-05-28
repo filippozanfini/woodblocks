@@ -27,6 +27,8 @@ public class StartController {
     private Button startButton;
 
     private Stage stage;
+
+    public static boolean manualMode = false;
     
     @FXML
     void startGame(ActionEvent event) {
@@ -48,8 +50,22 @@ public class StartController {
 
     @FXML
     void settingsGame(ActionEvent event) {
-
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Settings.fxml"));
+        BorderPane root2;
+        try {
+            root2 = (BorderPane) loader2.load();
+            Scene scene = new Scene(root2,600,285);
+            Stage stage = new Stage();
+            SettingsController settings = loader2.getController();
+            settings.init(stage);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
     }
+
     public void init(Stage g){
         stage = g;
     }

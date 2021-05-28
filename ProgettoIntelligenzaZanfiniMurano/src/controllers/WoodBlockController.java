@@ -91,6 +91,7 @@ public class WoodBlockController{
   private static Handler handler;  
   private boolean play;
   private boolean showAlert;
+
   public void init(Stage g) throws Exception { 
     
     stage = g;
@@ -112,7 +113,9 @@ public class WoodBlockController{
       e.printStackTrace();
     } 
 
-    init_embasp();
+    if(!StartController.manualMode) {
+      init_embasp();
+    }
   }
 
   // EMBASP
@@ -289,6 +292,10 @@ public class WoodBlockController{
 
     @FXML
     void goBack(ActionEvent event) {
+      if(!StartController.manualMode) {
+        play = false;
+        executorService.shutdown();
+      }
       FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/Start.fxml"));
       BorderPane root2;
       try {
@@ -604,8 +611,10 @@ public class WoodBlockController{
   }
     @FXML
     void restartGame(ActionEvent event) {
-    	play = false;
-    	executorService.shutdown();
+    	if(!StartController.manualMode) {
+        play = false;
+    	  executorService.shutdown();
+      }
     	saveRecordOnFile();
     	restart();
     }
