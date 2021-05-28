@@ -174,7 +174,7 @@ public class WoodBlockController{
 
     //handler.addOption(option);
     //handler.addOption(option2);
-   handler.addOption(option3);
+    handler.addOption(option3);
 
 
     Task<Void> task = new Task<Void>() {
@@ -490,6 +490,7 @@ public class WoodBlockController{
     }
 
     private void gameOverAlert() {
+    	/*
     	if(showAlert == true)
     		return;
       Image image = new Image("/assets/game_over.png",100,50, false, false);
@@ -519,7 +520,7 @@ public class WoodBlockController{
         System.exit(0);
       }
         
-      });
+      });*/
     }
 
     private void restart() {
