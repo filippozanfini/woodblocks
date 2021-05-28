@@ -80,7 +80,8 @@ public class DraggableNodeS extends DraggableNode {
     @Override
     public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
         System.out.println("ci sono");
-     
+        GameMatrix.checkFull(gameMatrix);
+
       
           node.setLayoutX(150);
           node.setLayoutY(550);

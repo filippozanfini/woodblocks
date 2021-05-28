@@ -378,12 +378,15 @@ new_full(A,B):- A=X-1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT270").
 
 :~ new_full(X,Y),not full(X+1,Y),not full(X,Y+1),not full(X,Y-1),not full(X-1,Y). [1@2,X,Y]
 
-%:~ new_full(X,Y),not full(X+1,Y+1),pos(X+1),pos(Y+1).[1@1,X,Y]
-%:~ new_full(X,Y),not full(X,Y+1),pos(X),pos(Y+1).[1@1,X,Y]
-%:~ new_full(X,Y),not full(X,Y-1),pos(X),pos(Y-1).[1@1,X,Y]
-%:~ new_full(X,Y),not full(X-1,Y),pos(X-1),pos(Y).[1@1,X,Y]
+:~ new_full(X,Y),not full(X+1,Y),pos(X+1),pos(Y).[1@1,X,Y]
+:~ new_full(X,Y),not full(X,Y+1),pos(X),pos(Y+1).[1@1,X,Y]
+:~ new_full(X,Y),not full(X,Y-1),pos(X),pos(Y-1).[1@1,X,Y]
+:~ new_full(X,Y),not full(X-1,Y),pos(X-1),pos(Y).[1@1,X,Y]
+
 %:~ new_full(X,Y),not full(X-1,Y+1),pos(X-1),pos(Y+1).[1@1,X,Y]
 %:~ new_full(X,Y),not full(X-1,Y-1),pos(X-1),pos(Y-1).[1@1,X,Y]
 %:~ new_full(X,Y),not full(X+1,Y-1),pos(X+1),pos(Y-1).[1@1,X,Y]
+%:~ new_full(X,Y),not full(X+1,Y+1),pos(X+1),pos(Y+1).[1@1,X,Y]
+
 
 
