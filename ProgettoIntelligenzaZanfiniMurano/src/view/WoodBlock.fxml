@@ -73,14 +73,24 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <Button fx:id="back_button" mnemonicParsing="false" onAction="#goBack" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/homeicon.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
+               <children>
+                  <Button fx:id="back_button" mnemonicParsing="false" onAction="#goBack" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/homeicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="restartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" text="Restart" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </top>
