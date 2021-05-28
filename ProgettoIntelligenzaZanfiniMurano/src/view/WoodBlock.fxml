@@ -84,11 +84,6 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="restartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-radius: 80px; -fx-background-color: #b97e46; -fx-text-fill: white;" text="Restart" textAlignment="CENTER">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
                </children>
             </HBox>
          </children>

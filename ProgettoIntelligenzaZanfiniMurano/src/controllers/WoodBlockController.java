@@ -70,9 +70,6 @@ public class WoodBlockController{
 
   @FXML
   private Label currentRecord;
-  
-  @FXML
-  private Button restartButton;
 
   private DraggableNode node1;
   private DraggableNode node2;
@@ -86,14 +83,13 @@ public class WoodBlockController{
   private Block b2;
   private Block b3;
   private Output o;
-  private static String encodingResource="src/encodings/wood.txt";
+  private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
   private ScheduledExecutorService executorService;
   private static Handler handler;  
   private boolean play;
   private boolean showAlert=false;
 
   public void init(Stage g) throws Exception { 
-    
     stage = g;
     matrix = GameMatrix.getInstance();
     GameMatrix.cleanAll();
@@ -121,13 +117,13 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception {
 
-    handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
+    //handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-   // handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
+    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
     try {
-	  ASPMapper.getInstance().registerClass(Block.class);
-	  ASPMapper.getInstance().registerClass(FullCell.class);
+	    ASPMapper.getInstance().registerClass(Block.class);
+	    ASPMapper.getInstance().registerClass(FullCell.class);
       ASPMapper.getInstance().registerClass(CellCount.class);
       ASPMapper.getInstance().registerClass(DraggableNode.class);
       ASPMapper.getInstance().registerClass(DraggableNodeB.class);
@@ -139,20 +135,9 @@ public class WoodBlockController{
       ASPMapper.getInstance().registerClass(DraggableNodeL.class);
       ASPMapper.getInstance().registerClass(DraggableNodeT.class);
 
-      
-
-
-
     } catch (ObjectNotValidException | IllegalAnnotationException e1) {
       e1.printStackTrace();
-      System.out.println("errore 1");
     }
-
-  // 1. carico i blocchi da aggiungere come fatti
-  // 2. carico le caselle piene come fatti
-  
-  //InputProgram facts = new ASPInputProgram();
-     // fatti variabili
 
     facts.clearAll();
     handler.removeProgram(facts);
@@ -165,11 +150,9 @@ public class WoodBlockController{
     OptionDescriptor option2= new OptionDescriptor("--filter=block/2");
     OptionDescriptor option3= new OptionDescriptor("--printonlyoptimum");
 
-
     //handler.addOption(option);
     //handler.addOption(option2);
     handler.addOption(option3);
-
 
     Task<Void> task = new Task<Void>() {
     	
@@ -185,20 +168,16 @@ public class WoodBlockController{
               add_temporary_facts(handler);
               o = handler.startSync(); 
               if(next(o) == false) {
-            	  
                 break;
-                
               }
             } catch(Exception e) {
-              System.out.println(e.getMessage());
+              e.printStackTrace();
             }
   
             Platform.runLater(() -> {
               play = next_move(o);
-              
             });
           }
-          
               
           return null;
       }
@@ -206,15 +185,11 @@ public class WoodBlockController{
 
   executorService = Executors.newSingleThreadScheduledExecutor();
   executorService.schedule(task, 1, TimeUnit.SECONDS);
-
-	
-
-	  
   }
    
   private boolean next_move(Output o)  {
     AnswerSets answersets = (AnswerSets) o;
-    System.out.println("ans " + answersets.getAnswersets());
+    // System.out.println("ans " + answersets.getAnswersets());
 
     GameMatrix.checkFull(gameMatrix);
     boolean trovato = false;
@@ -230,7 +205,6 @@ public class WoodBlockController{
               borderpane.getChildren().remove(node1);
               incrementCurrentRecord(node1);
               trovato = true;
-
             }
             else if(block.getID() == 2){
               node2.setColorEMBASP(gameMatrix, true,block.getRow(),block.getCol(), node2);
@@ -243,7 +217,6 @@ public class WoodBlockController{
               borderpane.getChildren().remove(node3);
               incrementCurrentRecord(node3);
               trovato = true;
-            
             }
         
             if(nodeCount == 1) {
@@ -251,18 +224,15 @@ public class WoodBlockController{
             } else {
               nodeCount--;
             }
-        
-            //GameMatrix.add(block.getRow(), block.getCol(), block.getType());
           }
        }
       } catch (Exception e) {
         e.printStackTrace();
-      } 
+      }
     } 
    
     if(!trovato || block == null ){
       executorService.shutdown();
-      System.out.println("dentro if" + play);
       play = false;
       gameOverAlert();
       return false;
@@ -280,21 +250,16 @@ public class WoodBlockController{
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | InstantiationException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
-      
-    }
-    
+  }
     
     executorService.shutdown();
     gameOverAlert();
-    System.out.println("play : "+ play);
    
     play = false;
     return false;
   }
             
-
     @FXML
     void goBack(ActionEvent event) {
       if(!StartController.manualMode) {
@@ -313,25 +278,19 @@ public class WoodBlockController{
       } catch (IOException e) {
           e.printStackTrace();
       }
-     
-    
     }
     
     private void initBlocks() {
     	nodeCount = 3;
      
-
     	try {
             node1 = (DraggableNode) Class.forName(randomblock()).newInstance();
-          //  node1 = new DraggableNodeC();
             node1.setPane(gameMatrix);
             node1.setID(1);
             node2 = (DraggableNode) Class.forName(randomblock()).newInstance();
-          //  node2 = new DraggableNodeC();
             node2.setPane(gameMatrix);
             node2.setID(2);
             node3 = (DraggableNode) Class.forName(randomblock()).newInstance();
-           // node3 = new DraggableNodeC();
             node3.setPane(gameMatrix);
             node3.setID(3);
 
@@ -480,7 +439,6 @@ public class WoodBlockController{
     }
   
     private String randomblock(){
-
     	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeIH", "modal.DraggableNodeB", "modal.DraggableNodeIH",
 						"modal.DraggableNodeT", "modal.DraggableNodeC", "modal.DraggableNodeIH", "modal.DraggableNodeIV",
 						"modal.DraggableNodeI2H","modal.DraggableNodeI2V", "modal.DraggableNodeB",
@@ -529,6 +487,10 @@ public class WoodBlockController{
     }
 
     private void restart() {
+      if(!StartController.manualMode) {
+        play = false;
+    	  executorService.shutdown();
+      }
       FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/WoodBlock.fxml"));
       BorderPane root2;
       try {
@@ -581,9 +543,8 @@ public class WoodBlockController{
     private void add_temporary_facts(Handler handler){ 
       for(int i=0; i<SIZE ; i++) {
 			  for(int j=0; j<SIZE; j++) {
-				  if(GameMatrix.get(i, j) != 0) { // aggiungo ai fatti le caselle già riempite 
+				  if(GameMatrix.get(i, j) != 0) { 
 					  try {
-               // System.out.println("piena "+ i + " " + j);
                 facts.addObjectInput(new FullCell(i,j));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -594,18 +555,14 @@ public class WoodBlockController{
       
       try {
         if(borderpane.getChildren().contains(node1)){
-          System.out.println(" nodo1 " + node1.getType());
-          
           b1 = new Block(1,node1.getType());
           facts.addObjectInput(b1);
         }
         if(borderpane.getChildren().contains(node2)){
-          System.out.println(" nodo2 " + node2.getType());
           b2 = new Block(2,node2.getType());
           facts.addObjectInput(b2);
         }
         if(borderpane.getChildren().contains(node3)){
-          System.out.println(" nodo3 " + node3.getType());
           b3 = new Block(3,node3.getType());
           facts.addObjectInput(b3);
         }
@@ -616,15 +573,6 @@ public class WoodBlockController{
     handler.startSync();
    
   }
-    @FXML
-    void restartGame(ActionEvent event) {
-    	if(!StartController.manualMode) {
-        play = false;
-    	  executorService.shutdown();
-      }
-    	saveRecordOnFile();
-    	restart();
-    }
 }
 
 

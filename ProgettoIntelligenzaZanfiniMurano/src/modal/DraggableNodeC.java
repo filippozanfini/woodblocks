@@ -1,13 +1,8 @@
 package modal;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -29,8 +24,6 @@ public class DraggableNodeC extends DraggableNode {
     private Rectangle rectangle3;
     private Rectangle rectangle4;
     
-  
-
     public DraggableNodeC() {
         super();
         this.setScore(4);
@@ -87,17 +80,12 @@ public class DraggableNodeC extends DraggableNode {
         }
        @Override
         public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
-            System.out.println("ci sono");
-           
-
           
               node.setLayoutX(150);
               node.setLayoutY(550);
               aggiungiBlocco(gameMatrix, x, y);
        
               GameMatrix.checkFull(gameMatrix);
-              GameMatrix.printMatrix();
-
               return true;
             }
         private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
@@ -127,17 +115,10 @@ public class DraggableNodeC extends DraggableNode {
             gameMatrix.add(new Rectangle(42,42,color),x, y+1);
             gameMatrix.add(new Rectangle(42,42,color),x+1, y+1);
     
-            System.out.println("sto chiamando 1");
             GameMatrix.add(x, y, this.getType());
-            System.out.println("sto chiamando 2");
             GameMatrix.add(x+1, y, this.getType());
-            System.out.println("sto chiamando 3");
             GameMatrix.add(x, y+1, this.getType());
-            System.out.println("sto chiamando 4");
             GameMatrix.add(x+1, y+1, this.getType());
             
         }
-       
-      
-
 }

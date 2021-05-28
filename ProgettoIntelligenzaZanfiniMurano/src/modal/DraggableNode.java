@@ -10,7 +10,6 @@ import it.unical.mat.embasp.languages.Param;
 @Id("in") 
 public abstract class DraggableNode extends Pane {
 
-    // node position
     @Param(0)
     private int ID;    
     @Param(1)
@@ -23,7 +22,6 @@ public abstract class DraggableNode extends Pane {
     private double x = 0;
     private double y = 0;
 
-    // mouse position
     private double mousex = 0;
     private double mousey = 0;
     private Node view;
@@ -44,7 +42,6 @@ public abstract class DraggableNode extends Pane {
     public DraggableNode() {
     	score = 0;
         init();
-        
     }
     public void setID(int id) {
         this.ID = id;
@@ -96,7 +93,6 @@ public abstract class DraggableNode extends Pane {
             @Override
             public void handle(MouseEvent event) {
 
-                // record the current mouse X and Y position on Node
                 mousex = event.getSceneX();
                 mousey = event.getSceneY();
                 x = getLayoutX();
@@ -107,12 +103,9 @@ public abstract class DraggableNode extends Pane {
             }
         });
 
-        //Event Listener for MouseDragged
         onMouseDraggedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
-                // Get the exact moved X and Y
 
                 double offsetX = event.getSceneX() - mousex;
                 double offsetY = event.getSceneY() - mousey;
@@ -128,7 +121,6 @@ public abstract class DraggableNode extends Pane {
 
                 dragging = true;
 
-                // again set current Mouse x AND y position
                 mousex = event.getSceneX();
                 mousey = event.getSceneY();  
                 
@@ -141,8 +133,6 @@ public abstract class DraggableNode extends Pane {
         onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("3");
-
                 dragging = false;
             }
         });
