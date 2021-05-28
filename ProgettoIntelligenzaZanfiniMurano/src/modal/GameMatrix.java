@@ -77,6 +77,7 @@ public class GameMatrix {
             }
                 if(rowCount == 10) {
                     for(int j=0; j<10; j++) {
+                        System.out.println("Sto eliminando una riga....");
                         remove(j, i);
                     }
     
@@ -118,6 +119,7 @@ public class GameMatrix {
 
             if(columnCount == 10) {
                 for(int j=0; j<10; j++) {
+                    System.out.println("Sto eliminando una colonna....");
                     remove(i, j);
                 }
 

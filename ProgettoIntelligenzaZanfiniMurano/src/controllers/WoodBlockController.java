@@ -261,6 +261,7 @@ public class WoodBlockController{
       executorService.shutdown();
       System.out.println("dentro if" + play);
       play = false;
+      System.out.println("FINE1");
       //gameOverAlert();
       return false;
     }
@@ -276,7 +277,6 @@ public class WoodBlockController{
 			   return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
@@ -284,6 +284,7 @@ public class WoodBlockController{
     }
     executorService.shutdown();
     System.out.println("play : "+ play);
+    System.out.println("FINE2");
   //  gameOverAlert();
     play = false;
     return false;
