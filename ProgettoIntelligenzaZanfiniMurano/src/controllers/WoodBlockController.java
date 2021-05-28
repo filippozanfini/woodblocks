@@ -70,6 +70,9 @@ public class WoodBlockController{
 
   @FXML
   private Label currentRecord;
+  
+  @FXML
+  private Button restartButton;
 
   private DraggableNode node1;
   private DraggableNode node2;
@@ -131,20 +134,8 @@ public class WoodBlockController{
       ASPMapper.getInstance().registerClass(DraggableNodeIH.class);
       ASPMapper.getInstance().registerClass(DraggableNodeIV.class);
       ASPMapper.getInstance().registerClass(DraggableNodeL.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL2.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL90.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL180.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL270.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL290.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeL2270.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeS.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeS90.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeS180.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeS270.class);
       ASPMapper.getInstance().registerClass(DraggableNodeT.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeT90.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeT180.class);
-      ASPMapper.getInstance().registerClass(DraggableNodeT270.class);
+
       
 
 
@@ -267,7 +258,7 @@ public class WoodBlockController{
       executorService.shutdown();
       System.out.println("dentro if" + play);
       play = false;
-      gameOverAlert();
+      //gameOverAlert();
       return false;
     }
     
@@ -290,7 +281,7 @@ public class WoodBlockController{
     }
     executorService.shutdown();
     System.out.println("play : "+ play);
-    gameOverAlert();
+  //  gameOverAlert();
     play = false;
     return false;
   }
@@ -365,7 +356,7 @@ public class WoodBlockController{
               }
 
               if((borderpane.getChildren().contains(node2) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
-                gameOverAlert();
+                //gameOverAlert();
                 return;
               }
 
@@ -401,7 +392,7 @@ public class WoodBlockController{
 
               if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
                 executorService.shutdown();
-                gameOverAlert();
+               // gameOverAlert();
                 return;
               }
            
@@ -436,7 +427,7 @@ public class WoodBlockController{
               }
 
               if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node2)) && spaceCount == 0) {
-                gameOverAlert();
+               // gameOverAlert();
                 return;
               }
            
@@ -466,7 +457,7 @@ public class WoodBlockController{
 
       if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
         executorService.shutdown();
-        gameOverAlert();
+       // gameOverAlert();
         return;
       }
     }
@@ -478,12 +469,12 @@ public class WoodBlockController{
   
     private String randomblock(){
 
-    	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeL90", "modal.DraggableNodeL180", "modal.DraggableNodeL270", 
-    			 "modal.DraggableNodeT", "modal.DraggableNodeT180", "modal.DraggableNodeIH", "modal.DraggableNodeIV", 
-    			 "modal.DraggableNodeI2H","modal.DraggableNodeI2V", "modal.DraggableNodeS", 
-    			 "modal.DraggableNodeS270","modal.DraggableNodeC", "modal.DraggableNodeB"};
+    	String [] cls = {"modal.DraggableNodeL", "modal.DraggableNodeIH", "modal.DraggableNodeB", "modal.DraggableNodeIH",
+						"modal.DraggableNodeT", "modal.DraggableNodeC", "modal.DraggableNodeIH", "modal.DraggableNodeIV",
+						"modal.DraggableNodeI2H","modal.DraggableNodeI2V", "modal.DraggableNodeB",
+						"modal.DraggableNodeB","modal.DraggableNodeC", "modal.DraggableNodeB"};
           Random random = new Random();
-          int n = random.nextInt(13);
+          int n = random.nextInt(14);
           String name = cls[n];
 
         return name;
@@ -611,6 +602,13 @@ public class WoodBlockController{
     handler.startSync();
    
   }
+    @FXML
+    void restartGame(ActionEvent event) {
+    	play = false;
+    	executorService.shutdown();
+    	saveRecordOnFile();
+    	restart();
+    }
 }
 
 
