@@ -86,11 +86,11 @@ public class WoodBlockController{
   private Block b2;
   private Block b3;
   private Output o;
-  private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
+  private static String encodingResource="src/encodings/wood.txt";
   private ScheduledExecutorService executorService;
   private static Handler handler;  
   private boolean play;
-  private boolean showAlert;
+  private boolean showAlert=false;
 
   public void init(Stage g) throws Exception { 
     
@@ -121,9 +121,9 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception {
 
-    //handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
+    handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
+   // handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
 
     try {
 	  ASPMapper.getInstance().registerClass(Block.class);
@@ -179,13 +179,16 @@ public class WoodBlockController{
     	  showAlert = false;
           while(play) {
             try {
-              Thread.sleep(500);
+              Thread.sleep(800);
               facts.clearAll();
               handler.removeProgram(facts);
               add_temporary_facts(handler);
               o = handler.startSync(); 
-              if(next(o) == false)
+              if(next(o) == false) {
+            	  
                 break;
+                
+              }
             } catch(Exception e) {
               System.out.println(e.getMessage());
             }
@@ -249,7 +252,7 @@ public class WoodBlockController{
               nodeCount--;
             }
         
-            GameMatrix.add(block.getRow(), block.getCol(), block.getType());
+            //GameMatrix.add(block.getRow(), block.getCol(), block.getType());
           }
        }
       } catch (Exception e) {
@@ -261,7 +264,7 @@ public class WoodBlockController{
       executorService.shutdown();
       System.out.println("dentro if" + play);
       play = false;
-      //gameOverAlert();
+      gameOverAlert();
       return false;
     }
     
@@ -282,9 +285,12 @@ public class WoodBlockController{
 		}
       
     }
+    
+    
     executorService.shutdown();
+    gameOverAlert();
     System.out.println("play : "+ play);
-  //  gameOverAlert();
+   
     play = false;
     return false;
   }
@@ -363,7 +369,7 @@ public class WoodBlockController{
               }
 
               if((borderpane.getChildren().contains(node2) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
-                //gameOverAlert();
+                gameOverAlert();
                 return;
               }
 
@@ -399,7 +405,7 @@ public class WoodBlockController{
 
               if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node3)) && spaceCount == 0) {
                 executorService.shutdown();
-               // gameOverAlert();
+                gameOverAlert();
                 return;
               }
            
@@ -434,7 +440,7 @@ public class WoodBlockController{
               }
 
               if((borderpane.getChildren().contains(node1) || borderpane.getChildren().contains(node2)) && spaceCount == 0) {
-               // gameOverAlert();
+                gameOverAlert();
                 return;
               }
            
@@ -450,7 +456,7 @@ public class WoodBlockController{
           }
          });
     	
-    	node1.setLayoutX(130);
+      node1.setLayoutX(130);
       node1.setLayoutY(600);
       node2.setLayoutX(290);
       node2.setLayoutY(600);
@@ -464,7 +470,7 @@ public class WoodBlockController{
 
       if(!GameMatrix.checkBlockAvailability(node1) && !GameMatrix.checkBlockAvailability(node2) && !GameMatrix.checkBlockAvailability(node3)) {
         executorService.shutdown();
-       // gameOverAlert();
+        gameOverAlert();
         return;
       }
     }
@@ -488,9 +494,9 @@ public class WoodBlockController{
     }
 
     private void gameOverAlert() {
-    	/*
-    	if(showAlert == true)
+    	if(showAlert)
     		return;
+   
       Image image = new Image("/assets/game_over.png",100,50, false, false);
       ImageView imageView = new ImageView(image);
       Alert alert = new Alert(AlertType.WARNING);
@@ -518,7 +524,9 @@ public class WoodBlockController{
         System.exit(0);
       }
         
-      });*/
+      });
+      
+      showAlert = true;
     }
 
     private void restart() {

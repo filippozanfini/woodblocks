@@ -44,6 +44,8 @@ public class GameMatrix {
     }
 
     public static void add(int x, int y, String type) {
+    	
+    	System.out.println("sto aggiungendo add"+ x + " "+ y);
         matrix[x][y] = 1;
         typeBlockMatrix[x][y] = type;
     }
@@ -61,12 +63,12 @@ public class GameMatrix {
         return typeBlockMatrix[x][y];
     }
 
-    public static void checkFull(GridPane gridPane) {
+    public synchronized static void checkFull(GridPane gridPane) {
         checkFullRow(gridPane);
         checkFullColumn(gridPane);
     }
 
-    private static void checkFullRow(GridPane gridPane) {
+    private synchronized static void checkFullRow(GridPane gridPane) {
         int rowCount = 0;
 
         for(int i=0; i<10; i++) {
@@ -76,9 +78,11 @@ public class GameMatrix {
                 }
             }
                 if(rowCount == 10) {
+                	System.out.println("sto eliminando la riga "+ i);
                     for(int j=0; j<10; j++) {
                         remove(j, i);
                     }
+                    GameMatrix.printMatrix();
     
                     ObservableList<Node> blocks = gridPane.getChildren();
                     ArrayList<Node> nodeToRemove = new ArrayList<Node>();
@@ -105,7 +109,7 @@ public class GameMatrix {
         }
     }
 
-    private static void checkFullColumn(GridPane gridPane) {
+    private synchronized static void checkFullColumn(GridPane gridPane) {
         int columnCount = 0;
 
         for(int i=0; i<10; i++) {
@@ -115,11 +119,13 @@ public class GameMatrix {
                 }
             }
 
-
             if(columnCount == 10) {
+            	System.out.println("sto eliminando la colonna "+ i);
                 for(int j=0; j<10; j++) {
                     remove(i, j);
                 }
+                GameMatrix.printMatrix();
+
 
                 ObservableList<Node> blocks = gridPane.getChildren();
                 ArrayList<Node> nodeToRemove = new ArrayList<Node>();
@@ -167,4 +173,13 @@ public class GameMatrix {
                 }
             }
         }
+   public static void printMatrix() {
+	   System.out.println("****************");
+	   for(int i=0; i<10; i++) {
+           for(int j=0; j<10; j++) {
+              System.out.print(matrix[j][i]+" ");}
+           System.out.println();
+	   }
+	   System.out.println("****************");
+   }
 }

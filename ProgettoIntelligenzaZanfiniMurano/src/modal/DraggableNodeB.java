@@ -77,12 +77,13 @@ public class DraggableNodeB extends DraggableNode {
     @Override
     public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
         System.out.println(".. utilizzando setColorEMBASP in DraggableNodeB..");
-          GameMatrix.checkFull(gameMatrix);
+        
 
           node.setLayoutX(150);
           node.setLayoutY(550);
           aggiungiBlocco(gameMatrix, x, y);
-    
+          GameMatrix.checkFull(gameMatrix);
+          GameMatrix.printMatrix();
           return true;
         }
     private void mostraAnteprima(GridPane gameMatrix, int x, int y) {
@@ -100,6 +101,7 @@ public class DraggableNodeB extends DraggableNode {
 
     private void aggiungiBlocco(GridPane gameMatrix, int x, int y) {
         gameMatrix.add(new Rectangle(42,42,Color.web("725A42")),x, y);
+        System.out.println("sto chiamando 1");
         GameMatrix.add(x, y, this.getType());
     }
 }
