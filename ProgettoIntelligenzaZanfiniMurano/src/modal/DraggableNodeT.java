@@ -1,8 +1,7 @@
 package modal;
-import javafx.scene.Node;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -83,11 +82,13 @@ public class DraggableNodeT extends DraggableNode {
     public boolean setColorEMBASP(GridPane gameMatrix, boolean conferma,int x,int y,DraggableNode node){
         System.out.println(".. utilizzando SetColorEMBASP di DraggableNodeT..");
      
-        GameMatrix.checkFull(gameMatrix);
+     
 
           node.setLayoutX(150);
           node.setLayoutY(550);
           aggiungiBlocco(gameMatrix, x, y);
+	      GameMatrix.checkFull(gameMatrix);
+	      GameMatrix.printMatrix();
 
           return true;
         }
