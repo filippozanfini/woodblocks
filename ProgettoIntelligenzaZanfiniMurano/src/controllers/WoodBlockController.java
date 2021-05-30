@@ -83,7 +83,7 @@ public class WoodBlockController{
   private Block b2;
   private Block b3;
   private Output o;
-  private static String encodingResource="ProgettoIntelligenzaZanfiniMurano/src/encodings/wood.txt";
+  private static String encodingResource="src/encodings/wood.txt";
   private ScheduledExecutorService executorService;
   private static Handler handler;  
   private boolean play;
@@ -117,13 +117,13 @@ public class WoodBlockController{
   // EMBASP
   public void init_embasp() throws Exception {
 
-    //handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
+    handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2.exe"));
     //handler = new DesktopHandler(new DLV2DesktopService("lib/dlv2"));
-    handler = new DesktopHandler(new DLV2DesktopService("ProgettoIntelligenzaZanfiniMurano/src/lib/dlv2-mac"));
+   // handler = new DesktopHandler(new DLV2DesktopService("src/lib/dlv2-mac"));
 
     try {
-	    ASPMapper.getInstance().registerClass(Block.class);
-	    ASPMapper.getInstance().registerClass(FullCell.class);
+	  ASPMapper.getInstance().registerClass(Block.class);
+	  ASPMapper.getInstance().registerClass(FullCell.class);
       ASPMapper.getInstance().registerClass(CellCount.class);
       ASPMapper.getInstance().registerClass(DraggableNode.class);
       ASPMapper.getInstance().registerClass(DraggableNodeB.class);

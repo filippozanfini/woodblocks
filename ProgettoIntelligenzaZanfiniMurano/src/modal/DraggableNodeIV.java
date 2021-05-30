@@ -56,8 +56,10 @@ public class DraggableNodeIV extends DraggableNode {
 
         if(conferma) {
             rimuoviAnteprima(gameMatrix);
+            
             if(GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x, y+1) && GameMatrix.checkAvailability(x, y+2) && GameMatrix.checkAvailability(x, y+3)) {
                 aggiungiBlocco(gameMatrix, x, y);
+                GameMatrix.checkFull(gameMatrix);
                 return true;
             } 
             else {

@@ -51,7 +51,9 @@ public class DraggableNodeI2V extends DraggableNode {
         }
 
         if(conferma) {
+        	
             rimuoviAnteprima(gameMatrix);
+            GameMatrix.checkFull(gameMatrix);
             if(GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x, y+1)) {
                 aggiungiBlocco(gameMatrix, x, y);
                 return true;

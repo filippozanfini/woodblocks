@@ -44,6 +44,7 @@ public class DraggableNodeB extends DraggableNode {
 
     @Override
     public boolean setColor(GridPane gameMatrix, boolean conferma){
+    	
         int x = (int)((this.getLayoutX()-30)/51)%100-1;
         int y = (int)(this.getLayoutY()/51)%100-1;
         if(!checkAvailability(x, y)){
@@ -54,6 +55,7 @@ public class DraggableNodeB extends DraggableNode {
             rimuoviAnteprima(gameMatrix);
             if(GameMatrix.checkAvailability(x, y)) {
                 aggiungiBlocco(gameMatrix, x, y);
+                GameMatrix.checkFull(gameMatrix);
                 return true;
             } else {
                 return false;

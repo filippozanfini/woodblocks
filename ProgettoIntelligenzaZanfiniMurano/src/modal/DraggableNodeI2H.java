@@ -51,9 +51,12 @@ public class DraggableNodeI2H extends DraggableNode {
         }
 
         if(conferma) {
+        	
             rimuoviAnteprima(gameMatrix);
+            
             if(GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x+1, y)) {
                 aggiungiBlocco(gameMatrix, x, y);
+                GameMatrix.checkFull(gameMatrix);
                 return true;
             } 
             else {

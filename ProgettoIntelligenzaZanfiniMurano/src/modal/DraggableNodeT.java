@@ -60,6 +60,7 @@ public class DraggableNodeT extends DraggableNode {
             rimuoviAnteprima(gameMatrix);
             if(GameMatrix.checkAvailability(x, y) && GameMatrix.checkAvailability(x+1, y) && GameMatrix.checkAvailability(x+2, y) &&  GameMatrix.checkAvailability(x+1, y-1)){
                 aggiungiBlocco(gameMatrix, x, y);
+                GameMatrix.checkFull(gameMatrix);
                 return true;
             } 
             else {
