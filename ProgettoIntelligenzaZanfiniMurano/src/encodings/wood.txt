@@ -1,8 +1,11 @@
 pos(0..9).
+
+
+in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
+
 :-#count{N,X,Y : in(N,X,Y,_)}>1.
 :-#count{N,X,Y : in(N,X,Y,_)}=0.
 
-in(ID,X,Y,TYPE) | notIN(ID,X,Y,TYPE) :- not full(X,Y),block(ID,TYPE),pos(X),pos(Y).
 
 % DraggableNodeB
 :-in(ID,X,Y,"modal.DraggableNodeB"),full(X,Y).
@@ -125,3 +128,7 @@ new_full(A,B):- A=X+1,B=Y-1,pos(A),pos(B),in(ID,X,Y,"modal.DraggableNodeT").
 :~ new_full(X,Y),not full(X,Y+1),pos(X),pos(Y+1).[1@1,X,Y]
 :~ new_full(X,Y),not full(X,Y-1),pos(X),pos(Y-1).[1@1,X,Y]
 :~ new_full(X,Y),not full(X-1,Y),pos(X-1),pos(Y).[1@1,X,Y]
+
+
+
+

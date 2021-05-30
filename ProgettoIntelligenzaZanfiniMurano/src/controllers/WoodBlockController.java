@@ -124,7 +124,6 @@ public class WoodBlockController{
     try {
 	  ASPMapper.getInstance().registerClass(Block.class);
 	  ASPMapper.getInstance().registerClass(FullCell.class);
-      ASPMapper.getInstance().registerClass(CellCount.class);
       ASPMapper.getInstance().registerClass(DraggableNode.class);
       ASPMapper.getInstance().registerClass(DraggableNodeB.class);
       ASPMapper.getInstance().registerClass(DraggableNodeC.class);
@@ -555,16 +554,16 @@ public class WoodBlockController{
       
       try {
         if(borderpane.getChildren().contains(node1)){
-          b1 = new Block(1,node1.getType());
+          b1 = new Block(1,node1.getType());		// aggiungo i fatti 'block'
           facts.addObjectInput(b1);
         }
         if(borderpane.getChildren().contains(node2)){
-          b2 = new Block(2,node2.getType());
-          facts.addObjectInput(b2);
+          b2 = new Block(2,node2.getType());	
+          facts.addObjectInput(b2);				// aggiungo i fatti 'block'
         }
         if(borderpane.getChildren().contains(node3)){
           b3 = new Block(3,node3.getType());
-          facts.addObjectInput(b3);
+          facts.addObjectInput(b3);				// aggiungo i fatti 'block'
         }
       } catch (Exception e) {
         e.printStackTrace();}
